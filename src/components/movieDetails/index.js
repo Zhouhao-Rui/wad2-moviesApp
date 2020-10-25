@@ -1,4 +1,5 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
+import { render } from "react-dom";
 import "./movieDetails.css";
 
 const movieDetails = ({ movie }) => {
@@ -50,6 +51,19 @@ const movieDetails = ({ movie }) => {
             {pc.name}
           </li>
         ))}
+      </ul>
+      <ul className="list-group list-group-horizontal">
+        <li key="pcc" className="list-group-item list-group-item-dark">
+          Production Countries
+        </li>
+        {movie.production_countries.map((country, index) => {
+          return (
+            <>
+              <li key={country.iso_3166_1} className="list-group-item">{country.iso_3166_1}</li>
+              <li key={country.name} className="list-group-item">{country.name}</li>
+            </>
+          )
+        })}
       </ul>
     </>
   );
