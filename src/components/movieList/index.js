@@ -6,7 +6,7 @@ export default memo(function movieList(props) {
   return (
     <div className="row movies bg-info">
       {props.movies.map((movie, index) => (
-        <Movie key={movie.id} movie={movie} />
+        <Movie key={movie.id} movie={movie} buttonHandler={props.buttonHandler} />
       ))}
     </div>
   )

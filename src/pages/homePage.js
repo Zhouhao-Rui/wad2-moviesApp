@@ -2,6 +2,7 @@ import React, {memo, useEffect, useState} from "react";
 import Header from "../components/headerMovieList";
 import MovieList from "../components/movieList";
 import FilterControls from "../components/filterControls";
+import StubAPI from '../api/stubAPI'
 
 const MovieListPage = () => {
   const [titleFilter, setTitleFilter] = useState("")
@@ -39,11 +40,20 @@ const MovieListPage = () => {
     else setGenreFilter(value);
   };
 
+  const addToFavorites = movieId => {
+    const index = movies.map(movie => movie.id).indexOf(movieId)
+
+    StubAPI.add(movies[index])
+    const updatedList = [...movies]
+    updatedList.splice(index, 1)
+    setmovies(updatedList)
+  }
+
   return (
     <>
       <Header numMovies={displayedMovies.length} />
       <FilterControls onUserInput={handleFilterChange} />
-      <MovieList movies={displayedMovies} />
+      <MovieList movies={displayedMovies} buttonHandler={addToFavorites} />
     </>
   );
 };
