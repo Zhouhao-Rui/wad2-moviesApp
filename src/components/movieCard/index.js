@@ -2,20 +2,21 @@ import React, { memo } from 'react'
 import './movieCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../globals/fontawesome"
+import { Link } from 'react-router-dom'
 
 export default memo(function MovieCard(props) {
   return (
     <div className="col-sm-3">
       <div className="card bg-white">
-        <img
-          className="card-img-tag center"
+        <Link to={`/movies/${props.movie.id}`}>
+          <img className="card-img-tag center" 
           alt={props.movie.title}
           src={
             props.movie.poster_path
-              ? `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
-              : "./film-poster-placeholder.png"
-          }
-        />
+            ? `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
+            : "./film-poster-placeholder.png"
+          } />
+        </Link>
         <div className="card-body">
           <h4 className="card-title ">{props.movie.title}</h4>
           <p>
