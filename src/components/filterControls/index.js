@@ -18,7 +18,9 @@ export default memo(function FilterControls(props) {
 
   const handleChange = (e, type, value) => {
     e.preventDefault()
-    // Completed in a later lab
+    // give the type and value to the Homepage Component
+    // inverse data flow pattern from child -> parent
+    props.onUserInput(type, value)
   };
   const handleTextChange = e => {
     handleChange(e, "name", e.target.value)

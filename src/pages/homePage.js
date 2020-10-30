@@ -4,6 +4,9 @@ import MovieList from "../components/movieList";
 import FilterControls from "../components/filterControls";
 
 const MovieListPage = () => {
+  const [titleFilter, setTitleFilter] = useState("")
+  const [genreFilter, setGenreFilter] = useState("0")
+
   const [movies, setmovies] = useState([])
 
   useEffect(() => {
@@ -17,11 +20,30 @@ const MovieListPage = () => {
       setmovies(movies)
     })
   }, [])
+
+  const genre = Number(genreFilter)
+  let displayedMovies = movies
+  .filter(movie => {
+    return movie.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1
+  })
+  .filter(movie => {
+    // on default, it will include the genre
+    return genre > 0 ? movie.genre_ids.includes(Number(genreFilter)) : true
+  })
+
+  // Both of the children components should use the filter function
+  // so we need the child component to give the value to the parent compnent
+  // we write the property onUserInput and get the user type
+  const handleFilterChange = (type, value) => {
+    if (type === "name") setTitleFilter(value);
+    else setGenreFilter(value);
+  };
+
   return (
     <>
-      <Header numMovies={movies.length} />
-      <FilterControls />
-      <MovieList movies={movies} />
+      <Header numMovies={displayedMovies.length} />
+      <FilterControls onUserInput={handleFilterChange} />
+      <MovieList movies={displayedMovies} />
     </>
   );
 };
