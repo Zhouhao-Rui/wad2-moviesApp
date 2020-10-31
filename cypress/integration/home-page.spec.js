@@ -56,6 +56,13 @@ describe('Home Page', () => {
           .should("have.text", matchingMovies[index].title);
         })
       })
+      it("should display no movies with 'xyz' in the title", () => {
+        const searchString = "xyz"
+        const matchingMovies = filterByTitle(movies, searchString)
+        expect(matchingMovies).to.have.length(0)
+        cy.get("input").clear().type(searchString)
+        cy.get(".card").should("have.length", 0)
+      })
     })
     describe("By movie genre" ,() => {
       // More later
