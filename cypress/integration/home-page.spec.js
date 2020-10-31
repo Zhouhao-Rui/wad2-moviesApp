@@ -79,6 +79,38 @@ describe('Home Page', () => {
         });
       })
     })
+    describe('By movie title and movie genre', () => {
+      it('should display movies with the specified title and specified genre', () => {
+        const searchString = "o"
+        const selectGenreId = 28
+        const selectGenreText = 'Action'
+
+        const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectGenreId)
+        // for title
+        cy.get('input').clear().type(searchString)
+        // for genreSelect
+        cy.get('select').select(selectGenreText)
+        cy.get('.card').should('have.length', matchingMovies.length)
+        cy.get('.card').each(($card, index) => {
+          cy.wrap($card)
+          .find('.card-title')
+          .should('have.text', matchingMovies[index].title)
+        })
+      })
+      it("should display no movies when title or genre no match", () => {
+        const searchString = "xyz"
+        const selectGenreId = 28
+        const selectGenreText = 'Action'
+
+        const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectGenreId)
+        expect(matchingMovies).to.have.length(0)
+        // for title
+        cy.get('input').clear().type(searchString)
+        // for genreSelect
+        cy.get('select').select(selectGenreText)
+        cy.get('.card').should('have.length', 0)
+      })
+    })
   });
 })
 
