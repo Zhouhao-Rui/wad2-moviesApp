@@ -49,10 +49,18 @@ describe("Movie Details Page", () => {
       });
   });
 
+  // don't need to turn to the right page, just check the url
   it("should display the Home icon with the correct URL value", () => {
     cy.get(".fa-home")
       .parent()
       .should("have.attr", "href")
       .should("include", movie.homepage);
   });
+
+  it("should display the right movie poster", () => {
+    cy.get(".col-sm-3")
+    .find("img")
+    .should("have.attr", "src")
+    .should("include", movie.poster_path)
+  })
 });
