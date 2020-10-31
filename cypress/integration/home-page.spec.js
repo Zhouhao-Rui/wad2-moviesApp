@@ -27,7 +27,7 @@ describe('Home Page', () => {
 
   describe('Base Test', () => {
     it('displays page header', () => {
-      cy.get('h2').contains("All Movies");
+      cy.get('h2').contains("No. Movies");
       cy.get('.badge').contains(20);
     })
   })
