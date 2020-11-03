@@ -88,4 +88,26 @@ describe('Navigation', () => {
     });
   });
   
+
+  describe("The Go Back button", () => {
+    beforeEach(() => {
+      cy.visit("/");
+    });
+    it("should navigate from home page to movie details and back", () => {
+      cy.get(".card").eq(1).find("img").click();
+      cy.get("svg[data-icon=arrow-circle-left]").click();
+      cy.url().should("not.include", `/movies`);
+      cy.get("h2").contains("No. Movies");
+    });
+    it("should navigate from favorites page to movie details and back", () => {
+      // first click add favorite with one moive go to favorite movies page
+      cy.get(".card").eq(1).find('.card-footer').find('.btn').click()
+      cy.get(".navbar-expand").find(".navbar-nav").find(".nav-item").eq(2).find(".nav-link").click()
+      // second go to the favorite page then find the movie to click
+      cy.get(".card").eq(0).find("img").click()
+      cy.get("svg[data-icon=arrow-circle-left]").click();
+      cy.url().should("include", "favorites")
+      cy.get("h2").contains("Favorite Movies")
+    });
+  });
 })
