@@ -1,26 +1,11 @@
-import React, {memo, useEffect, useState} from "react";
+import React, {memo, useContext} from "react";
 import PageTemplate from "../components/templateMovieListPage";
-import StubAPI from '../api/stubAPI'
-import { getMovies } from "../api/tmdb-api";
+import {MoviesContext} from '../contexts/moviesContext'
 
 const MovieListPage = () => {
-  const [movies, setmovies] = useState([])
 
-  useEffect(() => {
-    getMovies().then(movies => {
-      setmovies(movies);
-    });
-  }, [])
-
-  const addToFavorites = movieId => {
-    setmovies(movies => {
-      const index = movies.map(m => m.id).indexOf(movieId);
-      StubAPI.add(movies[index]);
-      let newMoviesState = [...movies]
-      newMoviesState.splice(index, 1);
-      return newMoviesState;
-    });
-  }
+  // use the useContext hook
+  const {movies, addToFavorites} = useContext(MoviesContext)
 
   return (
     <>

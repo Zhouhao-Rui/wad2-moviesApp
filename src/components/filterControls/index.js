@@ -1,15 +1,9 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useContext } from 'react'
 import "./filterControl.css"
-import { getGenres } from "../../api/tmdb-api";
+import { GenresContext } from '../../contexts/genresContext'
 
 export default memo(function FilterControls(props) {
-  const [genres, setGenres] = useState([{ id: '0', name: "All" }])
-
-  useEffect(() => {
-    getGenres().then(allGenres => {
-      setGenres([genres[0], ...allGenres]);
-    });
-  }, []);
+  const { genres } = useContext(GenresContext)
 
   const handleChange = (e, type, value) => {
     e.preventDefault()
@@ -29,10 +23,10 @@ export default memo(function FilterControls(props) {
       <div className="col-md-12">
         <h4>
           <span>List Filtering</span>
-          <input 
-          type="text"
-          placeholder="Title Search"
-          onChange={handleTextChange} />
+          <input
+            type="text"
+            placeholder="Title Search"
+            onChange={handleTextChange} />
           <span>Genres:</span>
           <select id="genre" onChange={handleGenreChange}>
             {genres.map((genre, index) => {
