@@ -6,7 +6,10 @@ import {MoviesContext} from '../contexts/moviesContext'
 const MovieListPage = () => {
 
   // use the useContext hook
-  const {movies} = useContext(MoviesContext)
+  const context = useContext(MoviesContext)
+  const movies = context.movies.filter((m) => {
+    return !("favorite" in m)
+  })
 
   return (
     <>
