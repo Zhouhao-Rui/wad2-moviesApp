@@ -29,6 +29,14 @@ const reducer = (state, action) => {
         ),
         upcoming: [...state.upcoming],
       };
+    case "add-movieList":
+      return {
+        upcoming: state.upcoming.map((m) =>
+          m.id === action.payload.movie.id
+            ? { ...m, movieList: true }
+            : m),
+        movies: [...state.movies]
+      }
     default:
       return state;
   }
@@ -48,6 +56,11 @@ const MoviesContextProvider = props => {
     dispatch({ type: "add-review", payload: { movie, review } });
   };
 
+  const addToMovieList = (movieId) => {
+    const index = state.upcoming.map(movie => movie.id).indexOf(movieId)
+    dispatch({ type: 'add-movieList', payload: { movie: state.upcoming[index] } })
+  }
+
   useEffect(() => {
     getMovies().then((movies) => {
       dispatch({ type: "load", payload: { movies } });
@@ -65,10 +78,11 @@ const MoviesContextProvider = props => {
   return (
     <MoviesContext.Provider
       value={{
-       movies: state.movies,
+        movies: state.movies,
         upcoming: state.upcoming,
         addToFavorites: addToFavorites,
         addReview: addReview,
+        addToMovieList: addToMovieList
       }}>
       {props.children}
     </MoviesContext.Provider>
