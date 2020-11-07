@@ -1,21 +1,15 @@
 import React, { memo, useEffect, useState, useContext } from 'react'
 import PageTemplate from "../components/templateMovieListPage";
-import AddToFavoriteButton from "../components/buttons/addToFavorites";
-import { getUpcomingMovies } from '../api/tmdb-api'
 import AddWatchList from '../components/buttons/addWatchList';
+import { MoviesContext } from '../contexts/moviesContext';
 
 const UpcomingMoviesPage = () => {
-  const [movies, setMovies] = useState([])
-  useEffect(() => {
-    getUpcomingMovies().then(res => {
-      setMovies(res)
-    })
-  }, [])
+  const context = useContext(MoviesContext)
 
   return (
     <PageTemplate
       title='Upcoming Movies'
-      movies={movies}
+      movies={context.upcoming}
       action={(movie => (
         <AddWatchList movie={movie} />
       ))}
