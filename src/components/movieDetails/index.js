@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import { render } from "react-dom";
 import "./movieDetails.css";
 
 const movieDetails = ({ movie }) => {

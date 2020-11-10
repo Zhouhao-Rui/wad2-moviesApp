@@ -10,7 +10,7 @@ const MovieReviews = ({ movie }) => {
     getMovieReviews(movie.id).then(reviews => {
       setReviews(reviews)
     })
-  }, [])
+  }, [movie.id])
 
   return (
     <table className="table table-striped table-bordered table-hover">

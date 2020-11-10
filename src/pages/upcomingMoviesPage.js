@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import PageTemplate from "../components/templateMovieListPage";
 import AddWatchList from '../components/buttons/addWatchList';
 import { MoviesContext } from '../contexts/moviesContext';
