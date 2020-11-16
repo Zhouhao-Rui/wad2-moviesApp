@@ -24,6 +24,8 @@
 /cypress/plugins
 /cypress/support
 cypress.env.json
+/cypress/videos
+/cypress/screenshots
 
 npm-debug.log*
 yarn-debug.log*
