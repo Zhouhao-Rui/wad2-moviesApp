@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 
 import { useAuth } from '../../contexts/authContext'
 
-const SiteHeader = () => {
+const SiteHeader = ({ history }) => {
   const { signout, currentUser } = useAuth()
   return (
     <nav className="navbar fixed-top navbar-light bg-dark">
@@ -48,12 +48,12 @@ const SiteHeader = () => {
           {/* 
             if no user is authorized, it will not show the logout link
           */}
-          {currentUser && 
-          <li className="nav-item">
-            <p className="nav-link text-white" onClick={() => signout()} style={{ cursor: "pointer" }}>
-              logOut
+          {currentUser &&
+            <li className="nav-item">
+              <p className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
+                logOut
             </p>
-          </li>
+            </li>
           }
         </ul>
       </nav>
@@ -61,4 +61,4 @@ const SiteHeader = () => {
   );
 };
 
-export default SiteHeader;
+export default withRouter(SiteHeader);
