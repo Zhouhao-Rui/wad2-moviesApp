@@ -46,14 +46,34 @@ const SiteHeader = ({ history }) => {
             </Link>
           </li>
           {/* 
-            if no user is authorized, it will not show the logout link
+            if user is not authorized, it will show the signin Link
+          */}
+          {
+            !currentUser &&
+            <>
+              <li>
+                <Link className="nav-link text-white" to="/signin">
+                  signin
+                </Link>
+              </li>
+            </>
+          }
+          {/* 
+            if user is authorized, it will show the logout and profile link
           */}
           {currentUser &&
+          <>
+            <li>
+              <Link className="nav-link text-white" to="/profile">
+                profile
+              </Link>
+            </li>
             <li className="nav-item">
               <p className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
                 logOut
             </p>
             </li>
+          </>
           }
         </ul>
       </nav>
