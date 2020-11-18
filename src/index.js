@@ -15,6 +15,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import Signup from './components/signup'
 import Signin from './components/signin'
 import PrivateRoute from './components/privateRoute'
+import Profile from './components/profile'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <GenresContextProvider>
               <AuthProvider>
                 <Switch>
+                  <PrivateRoute path="/profile" component={Profile} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/signin" component={Signin} />
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
