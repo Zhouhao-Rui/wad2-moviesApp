@@ -10,8 +10,10 @@ import SiteHeader from './components/siteHeader'
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import MoviesContextProvider from './contexts/moviesContext'
 import GenresContextProvider from './contexts/genresContext'
+import AuthProvider from './contexts/authContext'
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import Signup from './components/signup'
+import Signin from './components/signin'
 
 const App = () => {
   return (
@@ -21,16 +23,19 @@ const App = () => {
         <div className="container-fluid">
           <MoviesContextProvider>
             <GenresContextProvider>
-              <Switch>
-                <Route path="/signup" component={Signup} />
-                <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                <Route path="/reviews/:id" component={MovieReviewPage} />
-                <Route path="/movies/favorites" component={favoriteMoviesPage} />
-                <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
-                <Route path="/movies/:id" component={MoviePage} />
-                <Route path="/" component={HomePage} />
-                <Redirect from="*" to="/" />
-              </Switch>
+              <AuthProvider>
+                <Switch>
+                  <Route path="/signup" component={Signup} />
+                  <Route path="/signin" component={Signin} />
+                  <Route exact path="/reviews/form" component={AddMovieReviewPage} />
+                  <Route path="/reviews/:id" component={MovieReviewPage} />
+                  <Route path="/movies/favorites" component={favoriteMoviesPage} />
+                  <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
+                  <Route path="/movies/:id" component={MoviePage} />
+                  <Route path="/" component={HomePage} />
+                  <Redirect from="*" to="/" />
+                </Switch>
+              </AuthProvider>
             </GenresContextProvider>
           </MoviesContextProvider>
         </div>

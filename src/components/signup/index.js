@@ -1,7 +1,10 @@
 import React from 'react'
 import { Formik } from 'formik'
+import { useAuth } from '../../contexts/authContext'
+import { Link, withRouter } from 'react-router-dom'
 
-function Signup() {
+function Signup({ history }) {
+  const { signup } = useAuth()
   const validate = values => {
     const errors = {}
     if (!values.email) {
@@ -13,7 +16,7 @@ function Signup() {
     if (!values.password) {
       errors.password = "password is required"
     } else if (values.password.length < 6) {
-      errors.password = "Must be 10 chars or more"
+      errors.password = "Must be 6 chars or more"
     }
     return errors
   }
@@ -22,8 +25,14 @@ function Signup() {
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={validate}
-        onSubmit={values => {
-          console.log(values)
+        onSubmit={async values => {
+          try {
+            await signup(values.email, values.password)
+            console.log('Create a user!')
+            history.push('/signin')
+          } catch {
+            console.log('Fail to create an account')
+          }
         }}
       >
         {({
@@ -71,7 +80,7 @@ function Signup() {
                 </button>
                 </div>
                 <div className="w-100 text-center mt-2">
-                  Already have an account?
+                  Already have an account? <Link to="/signin">Sign in</Link>
                 </div>
               </form>
             </div>
@@ -81,4 +90,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default withRouter(Signup)
