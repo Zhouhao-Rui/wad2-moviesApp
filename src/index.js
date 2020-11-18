@@ -14,12 +14,15 @@ import AuthProvider from './contexts/authContext'
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import Signup from './components/signup'
 import Signin from './components/signin'
+import PrivateRoute from './components/privateRoute'
 
 const App = () => {
   return (
     <BrowserRouter>
       <div className="jumbotron">
-        <SiteHeader />
+        <AuthProvider>
+          <SiteHeader />
+        </AuthProvider>
         <div className="container-fluid">
           <MoviesContextProvider>
             <GenresContextProvider>
@@ -29,7 +32,7 @@ const App = () => {
                   <Route path="/signin" component={Signin} />
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                   <Route path="/reviews/:id" component={MovieReviewPage} />
-                  <Route path="/movies/favorites" component={favoriteMoviesPage} />
+                  <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                   <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                   <Route path="/movies/:id" component={MoviePage} />
                   <Route path="/" component={HomePage} />
