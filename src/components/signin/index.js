@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { useAuth } from '../../contexts/authContext'
 import { Link, withRouter } from 'react-router-dom'
 
 function Signin({ history }) {
   const { signin } = useAuth()
+  const [errorMsg, setErrorMsg] = useState("")
   const validate = values => {
     const errors = {}
     if (!values.email) {
@@ -30,8 +31,8 @@ function Signin({ history }) {
             await signin(values.email, values.password)
             console.log('Login Success!')
             history.push('/')
-          } catch {
-            alert('Fail to login')
+          } catch(e) {
+            setErrorMsg(e.message)
           }
         }}
       >
@@ -47,6 +48,9 @@ function Signin({ history }) {
             <div className="d-flex align-items-center justify-content-center" style={{ height: "80vh" }}>
               <form
                 onSubmit={handleSubmit}>
+                <div className=" alert-danger">
+                  {errorMsg}
+                </div>
                 <h1 className="text-center mb-4">Login for Movie</h1>
                 <div className="form-group">
                   <label htmlFor="email">Email address: </label>
