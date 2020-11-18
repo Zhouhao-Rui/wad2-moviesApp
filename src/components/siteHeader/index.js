@@ -4,7 +4,10 @@ import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 
+import { useAuth } from '../../contexts/authContext'
+
 const SiteHeader = () => {
+  const { signout, currentUser } = useAuth()
   return (
     <nav className="navbar fixed-top navbar-light bg-dark">
       <nav className="navbar-brand text-white">
@@ -42,6 +45,16 @@ const SiteHeader = () => {
               Favorites
             </Link>
           </li>
+          {/* 
+            if no user is authorized, it will not show the logout link
+          */}
+          {currentUser && 
+          <li className="nav-item">
+            <p className="nav-link text-white" onClick={() => signout()} style={{ cursor: "pointer" }}>
+              logOut
+            </p>
+          </li>
+          }
         </ul>
       </nav>
     </nav>
