@@ -13,7 +13,6 @@ function Profile() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const favorites = movies.filter(movie => movie.favorite)
   const { currentUser } = useAuth()
-  console.log(favorites)
 
   const forwardIndex = (index) => {
     if (index < favorites.length - 1) {

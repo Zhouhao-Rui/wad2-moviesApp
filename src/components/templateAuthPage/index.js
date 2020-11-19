@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
-import { useAuth } from '../../contexts/authContext'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
-function Signup({ history }) {
-  const { signup } = useAuth()
+function AuthTemplate(props) {
+  const { authMethod, successRoutePath, titleMsg, buttonMsg, buttomMsg, bottomRoutePath, history } = props
+  const [errorMsg, setErrorMsg] = useState("")
   const validate = values => {
     const errors = {}
     if (!values.email) {
@@ -27,11 +27,10 @@ function Signup({ history }) {
         validate={validate}
         onSubmit={async values => {
           try {
-            await signup(values.email, values.password)
-            console.log('Create a user!')
-            history.push('/signin')
-          } catch {
-            console.log('Fail to create an account')
+            await authMethod(values.email, values.password)
+            history.push(successRoutePath)
+          } catch (e) {
+            setErrorMsg(e.message)
           }
         }}
       >
@@ -47,7 +46,10 @@ function Signup({ history }) {
             <div className="d-flex align-items-center justify-content-center" style={{ height: "80vh" }}>
               <form
                 onSubmit={handleSubmit}>
-                <h1 className="text-center mb-4">Register for Movie</h1>
+                <div className=" alert-danger">
+                  {errorMsg}
+                </div>
+                <h1 className="text-center mb-4">{titleMsg}</h1>
                 <div className="form-group">
                   <label htmlFor="email">Email address: </label>
                   <input
@@ -60,7 +62,7 @@ function Signup({ history }) {
                     value={values.email}
                   />
                 </div>
-                {/* <p className="text-danger">{errors.email}</p> */}
+                <p className="text-danger">{errors.email}</p>
                 <div className="form-group">
                   <label htmlFor="password">Password: </label>
                   <input
@@ -76,11 +78,11 @@ function Signup({ history }) {
                 <p className="text-danger">{errors.password}</p>
                 <div className="text-center">
                   <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-                    Register
-                </button>
+                    {buttonMsg}
+                  </button>
                 </div>
                 <div className="w-100 text-center mt-2">
-                  Already have an account? <Link to="/signin">Sign in</Link>
+                  {buttomMsg} <Link to={bottomRoutePath}>Sign up</Link>
                 </div>
               </form>
             </div>
@@ -90,4 +92,4 @@ function Signup({ history }) {
   )
 }
 
-export default withRouter(Signup)
+export default withRouter(AuthTemplate)

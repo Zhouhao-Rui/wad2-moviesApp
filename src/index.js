@@ -12,10 +12,10 @@ import MoviesContextProvider from './contexts/moviesContext'
 import GenresContextProvider from './contexts/genresContext'
 import AuthProvider from './contexts/authContext'
 import AddMovieReviewPage from './pages/addMovieReviewPage'
-import Signup from './components/signup'
-import Signin from './components/signin'
 import PrivateRoute from './components/privateRoute'
 import Profile from './components/profile'
+import SigninPage from './pages/signinPage'
+import SignupPage from './pages/signupPage'
 
 const App = () => {
   return (
@@ -30,8 +30,8 @@ const App = () => {
               <AuthProvider>
                 <Switch>
                   <PrivateRoute path="/profile" component={Profile} />
-                  <Route path="/signup" component={Signup} />
-                  <Route path="/signin" component={Signin} />
+                  <Route path="/signup" component={SignupPage} />
+                  <Route path="/signin" component={SigninPage} />
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                   <Route path="/reviews/:id" component={MovieReviewPage} />
                   <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
