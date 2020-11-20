@@ -100,3 +100,18 @@ describe('Login Page', () => {
     cy.get('[data-cy=logout]').should("have.text", "logOut")
   })
 })
+
+describe('Profile Page', () => {
+  before(() => {
+    cy.visit('/')
+  })
+
+  it('should display images of favorite movies', () => {
+    cy.get(".btn").eq(0).click()
+    cy.get(".btn").eq(1).click()
+    cy.get(".btn").eq(2).click()
+    cy.get('[data-cy=profile]').click()
+    cy.url().should("match", /profile/)
+    cy.get('.carousel-img').should('have.length', 3)
+  })
+})

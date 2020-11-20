@@ -61,12 +61,12 @@ function Profile() {
                   index === currentIndex ?
                     <div key={movie.id} className="carousel-item active">
                       <Link to={`/movies/${movie.id}`}>
-                        <img src={`https://image.tmdb.org/t/p/w500/${favorites[index].poster_path}`} style={{ width: "200px", height: "300px" }} alt="..." />
+                        <img className="carousel-img" src={`https://image.tmdb.org/t/p/w500/${favorites[index].poster_path}`} style={{ width: "200px", height: "300px" }} alt="..." />
                       </Link>
                     </div>
                     :
                     <div key={movie.id} className="carousel-item">
-                      <img src={`https://image.tmdb.org/t/p/w500/${favorites[index].poster_path}`} style={{ width: "200px", height: "300px" }} alt="..." />
+                      <img className="carousel-img" src={`https://image.tmdb.org/t/p/w500/${favorites[index].poster_path}`} style={{ width: "200px", height: "300px" }} alt="..." />
                     </div>
                 )) : ""}
               </div>
