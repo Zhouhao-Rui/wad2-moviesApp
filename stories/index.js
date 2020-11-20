@@ -11,10 +11,14 @@ import AddFavoriteButton from "../src/components/buttons/addToFavorites";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import MovieCotextProvider from '../src/contexts/moviesContext'
+import AuthProvider from '../src/contexts/authContext'
 import { action } from "@storybook/addon-actions";
 import MovieReviews from '../src/components/movieReviews'
 import MovieReview from '../src/components/movieReview'
 import ReviewForm from '../src/components/reviewForm'
+import SigninPage from "../src/pages/signinPage";
+import SignupPage from "../src/pages/signupPage";
+import Profile from "../src/components/profile";
 
 const sample = {
   adult: false,
@@ -191,5 +195,47 @@ storiesOf("Movie Reviews Page/ReviewForm", module)
   .add("default", () => {
     return (
       <ReviewForm movie={sample} />
+    )
+  })
+
+storiesOf("Auth Page/LoginPage", module)
+  .addDecorator(story => (
+    <AuthProvider>{story()}</AuthProvider>
+  ))
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <SigninPage />
+    )
+  })
+
+storiesOf("Auth Page/RegisterPage", module)
+  .addDecorator(story => (
+    <AuthProvider>{story()}</AuthProvider>
+  ))
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <SignupPage />
+    )
+  })
+
+storiesOf("Auth Page/Profile", module)
+  .addDecorator(story => (
+    <AuthProvider>{story()}</AuthProvider>
+  ))
+  .addDecorator(story => (
+    <MovieCotextProvider>{story()}</MovieCotextProvider>
+  ))
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <Profile />
     )
   })
