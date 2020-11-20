@@ -41,7 +41,7 @@ const SiteHeader = ({ history }) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/movies/favorites">
+            <Link data-cy="favorite" className="nav-link text-white" to="/movies/favorites">
               Favorites
             </Link>
           </li>
