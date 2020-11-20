@@ -62,20 +62,20 @@ function AuthTemplate(props) {
                     value={values.email}
                   />
                 </div>
-                <p className="text-danger">{errors.email}</p>
+                <p className="text-danger" data-cy="email-warning">{errors.email}</p>
                 <div className="form-group">
                   <label htmlFor="password">Password: </label>
                   <input
                     type="password"
                     name="password"
                     className="form-control"
-                    id="pawword"
+                    id="password"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
                   />
                 </div>
-                <p className="text-danger">{errors.password}</p>
+                <p className="text-danger" data-cy="password-warning">{errors.password}</p>
                 <div className="text-center">
                   <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
                     {buttonMsg}
