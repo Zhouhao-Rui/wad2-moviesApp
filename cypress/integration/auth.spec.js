@@ -15,7 +15,7 @@ describe('From Home page', () => {
 
   it('should not have the profile and logout', () => {
     cy.get('.nav-link').each(($el) => {
-      cy.wrap($el).should("not.eq", "profile").should("not.eq", "logout")
+      cy.wrap($el).should("not.eq", "profile").should("not.eq", "logOut")
     })
   })
 })
@@ -69,5 +69,34 @@ describe('Register Page', () => {
     cy.get("#password").type("123123")
     cy.get(".btn").click()
     cy.url().should("match", /signin/)
+  })
+})
+
+describe('Login Page', () => {
+  beforeEach(() => {
+    cy.visit("/signin")
+  })
+
+  it("should show error message when email address is wrong", () => {
+    cy.get("#email").type("123@123.ccc")
+    cy.get("#password").type("123123")
+    cy.get(".btn").click()
+    cy.get(".alert-danger").should("have.text", "There is no user record corresponding to this identifier. The user may have been deleted.")
+  })
+
+  it("should show error message when password is not related to the email address", () => {
+    cy.get("#email").type(`${Cypress.env("EMAIL")}`)
+    cy.get("#password").type("111222")
+    cy.get(".btn").click()
+    cy.get(".alert-danger").should("have.text", "The password is invalid or the user does not have a password.")
+  })
+
+  it("should redirect to home page when email address and password is right", () => {
+    cy.get("#email").type(`${Cypress.env("EMAIL")}`)
+    cy.get("#password").type(`${Cypress.env("PASSWORD")}`)
+    cy.get(".btn").click()
+    cy.url().should("eq", "http://localhost:3000/")
+    cy.get('[data-cy=profile]').should("have.text", "profile")
+    cy.get('[data-cy=logout]').should("have.text", "logOut")
   })
 })

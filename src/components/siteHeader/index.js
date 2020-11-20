@@ -64,12 +64,12 @@ const SiteHeader = ({ history }) => {
           {currentUser &&
           <>
             <li>
-              <Link className="nav-link text-white" to="/profile">
+              <Link data-cy="profile" className="nav-link text-white" to="/profile">
                 profile
               </Link>
             </li>
             <li className="nav-item">
-              <p className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
+              <p data-cy="logout" className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
                 logOut
             </p>
             </li>
