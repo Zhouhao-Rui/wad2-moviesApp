@@ -17,12 +17,11 @@
 .env.test.local
 .env.production.local
 .env
+.nyc_output
 
 # cypress
 /cypress/integration/examples
 /cypress/fixtures
-/cypress/plugins
-/cypress/support
 cypress.env.json
 /cypress/videos
 /cypress/screenshots

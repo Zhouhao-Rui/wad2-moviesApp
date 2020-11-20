@@ -81,7 +81,7 @@ function AuthTemplate(props) {
                     {buttonMsg}
                   </button>
                 </div>
-                <div className="w-100 text-center mt-2">
+                <div className="w-100 text-center mt-2 hint">
                   {buttomMsg} <Link to={bottomRoutePath}>Sign up</Link>
                 </div>
               </form>

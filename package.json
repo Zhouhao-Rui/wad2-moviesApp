@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -23,6 +24,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "cypress:start:app": "react-scripts -r @cypress/instrument-cra start",
+    "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
+    "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
+    "cypress:run:local": "npm run cypress:start:wait -- \"cypress run\"&& npx nyc report --check-coverage --lines 80",
     "start:ci": "start-server-and-test 'http-server ./build  -p 3000' 3000 'cypress run --browser chrome'"
   },
   "eslintConfig": {
@@ -35,6 +41,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@cypress/code-coverage": "^3.8.3",
     "@storybook/addon-actions": "^5.3.1",
     "@storybook/react": "^5.3.1",
     "babel-loader": "^8.0.6",

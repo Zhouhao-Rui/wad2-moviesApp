@@ -52,7 +52,7 @@ const SiteHeader = ({ history }) => {
             !currentUser &&
             <>
               <li>
-                <Link className="nav-link text-white" to="/signin">
+                <Link data-cy="signin" className="nav-link text-white" to="/signin">
                   signin
                 </Link>
               </li>

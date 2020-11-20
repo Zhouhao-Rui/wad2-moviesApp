@@ -5,7 +5,6 @@ image: cypress/browsers:node12.0.0-chrome73
 stages:
   - install
   - build
-  - exercise
   - test
 
 variables:
@@ -25,19 +24,25 @@ cache:
 
 install_dependencies:
   stage: install
+  only: 
+    - staging
   script:
     - npm ci
 
 bundle_app:
   stage: build
+  only: 
+    - staging
   script:
     - npm run build
   artifacts:
     paths:
       - build/
 
-e2etest:    
+production_test:    
   stage: test
+  only:
+    - staging
   before_script:
     - npm install -g http-server
     - npm install cypress
@@ -45,24 +50,20 @@ e2etest:
     # start the server in the background
     - npm run start:ci
 
-build_jobx:
-  stage: build
-  only:
-    - demobranch
-  script:
-    - echo "build job X on demobranch works"
-
-test_jobX:
+development_test:
   stage: test
   only:
-    - master
-    - demobranch2
+    - staging
   script:
-    - echo "test job X"
+    - npm run cypress:run
+    - npx nyc report --check-coverage --lines 80
+  artifacts:
+    when: always
+    paths:
+      - coverage
+      - cypress/videos/**/*.mp4
+      - cypress/screenshots/**/*.png
+    expire_in: 10 days
 
-exercise_job:
-  stage: exercise
-  only: 
-    - master
-  script:
-    - echo "exercise job on master branch works"
+
+
