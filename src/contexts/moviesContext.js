@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
 
 export const MoviesContext = React.createContext(null)
@@ -45,6 +45,9 @@ const reducer = (state, action) => {
 // wrap the value in one Function
 const MoviesContextProvider = props => {
 
+  const [homePage, setHomePage] = useState(1)
+  const [upcomingPage, setUpcomingPage] = useState(1)
+
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const addToFavorites = (movieId) => {
@@ -61,19 +64,27 @@ const MoviesContextProvider = props => {
     dispatch({ type: 'add-movieList', payload: { movie: state.upcoming[index] } })
   }
 
-  useEffect(() => {
-    getMovies().then((movies) => {
-      dispatch({ type: "load", payload: { movies } });
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const getMoviesByPage = (page) => {
+    getMovies(page).then(movies => {
+      dispatch({ type: 'load', payload: { movies } })
+    })
+  }
+
+  const getUpcomingMoviesByPage = (page) => {
+    getUpcomingMovies(page).then(movies => {
+      dispatch({ type: "load-upcoming", payload: { movies } });
+    })
+  }
 
   useEffect(() => {
-    getUpcomingMovies().then((movies) => {
-      dispatch({ type: "load-upcoming", payload: { movies } });
-    });
+    getMoviesByPage(homePage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [homePage]);
+
+  useEffect(() => {
+    getUpcomingMoviesByPage(upcomingPage)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [upcomingPage]);
 
   return (
     <MoviesContext.Provider
