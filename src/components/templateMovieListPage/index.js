@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../headerMovieList";
 import MovieList from "../movieList";
 import FilterControls from "../filterControls";
+import Pagination from '../pagination'
 
 const MovieListPageTemplate = ({movies, title, action}) => {
   const [nameFilter, setNameFilter] = useState("");
@@ -30,6 +31,7 @@ const MovieListPageTemplate = ({movies, title, action}) => {
         action={action}
         movies={displayedMovies}
       ></MovieList>
+      <Pagination />
     </>
   );
 };
