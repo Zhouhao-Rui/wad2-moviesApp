@@ -1,7 +1,8 @@
-import {combineReducers} from 'redux-immutable'
+import { combineReducers } from 'redux-immutable'
+import { reducer as movieReducer } from '../components/store'
 
 const combinedReducer = combineReducers({
-
+  movies: movieReducer
 })
 
-export default combineReducers
+export default combinedReducer

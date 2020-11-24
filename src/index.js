@@ -21,13 +21,13 @@ import store from "./store";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="jumbotron">
-        <AuthProvider>
-          <SiteHeader />
-        </AuthProvider>
-        <div className="container-fluid">
-          <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="jumbotron">
+          <AuthProvider>
+            <SiteHeader />
+          </AuthProvider>
+          <div className="container-fluid">
             <MoviesContextProvider>
               <GenresContextProvider>
                 <AuthProvider>
@@ -46,10 +46,10 @@ const App = () => {
                 </AuthProvider>
               </GenresContextProvider>
             </MoviesContextProvider>
-          </Provider>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

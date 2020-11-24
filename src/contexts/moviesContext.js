@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
+import { useDispatch } from "react-redux";
 
 export const MoviesContext = React.createContext(null)
 
@@ -48,10 +49,13 @@ const MoviesContextProvider = props => {
   const [homePage, setHomePage] = useState(1)
   const [upcomingPage, setUpcomingPage] = useState(1)
 
+  const Reduxdispatch = useDispatch()
+
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const addToFavorites = (movieId) => {
     const index = state.movies.map(m => m.id).indexOf(movieId)
+    Reduxdispatch()
     dispatch({ type: 'add-favorite', payload: { movie: state.movies[index] } })
   }
 
