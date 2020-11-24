@@ -76,6 +76,14 @@ const MoviesContextProvider = props => {
     })
   }
 
+  const homeNavigation = (currentPage) => {
+    setHomePage(currentPage)
+  }
+
+  const upcomingNavigation = (currentPage) => {
+    setUpcomingPage(currentPage)
+  }
+
   useEffect(() => {
     getMoviesByPage(homePage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,7 +101,9 @@ const MoviesContextProvider = props => {
         upcoming: state.upcoming,
         addToFavorites: addToFavorites,
         addReview: addReview,
-        addToMovieList: addToMovieList
+        addToMovieList: addToMovieList,
+        homeNavigation: homeNavigation,
+        upcomingNavigation: upcomingNavigation,
       }}>
       {props.children}
     </MoviesContext.Provider>
