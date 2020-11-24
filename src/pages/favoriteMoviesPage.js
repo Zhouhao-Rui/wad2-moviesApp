@@ -1,10 +1,7 @@
 import React, {memo} from 'react'
-import { useContext } from 'react';
 import AddReviewButton from '../components/buttons/addReview';
 import PageTemplate from "../components/templateMovieListPage";
-import { MoviesContext } from '../contexts/moviesContext';
 import { shallowEqual, useSelector } from "react-redux";
-
 
 const FavoriteMoviesPage = () => {
   const { favorites } = useSelector(state => ({
