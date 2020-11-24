@@ -3,10 +3,13 @@ import { useContext } from 'react';
 import AddReviewButton from '../components/buttons/addReview';
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from '../contexts/moviesContext';
+import { shallowEqual, useSelector } from "react-redux";
+
 
 const FavoriteMoviesPage = () => {
-  const context = useContext(MoviesContext)
-  const favorites = context.movies.filter(m => m.favorite)
+  const { favorites } = useSelector(state => ({
+    favorites: state.getIn(["movies", "favorites"])
+  }), shallowEqual)
 
   return (
     <PageTemplate
