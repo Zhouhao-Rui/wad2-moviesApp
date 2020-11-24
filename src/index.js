@@ -16,6 +16,8 @@ import PrivateRoute from './components/privateRoute'
 import Profile from './components/profile'
 import SigninPage from './pages/signinPage'
 import SignupPage from './pages/signupPage'
+import { Provider } from 'react-redux'
+import store from "./store";
 
 const App = () => {
   return (
@@ -25,24 +27,26 @@ const App = () => {
           <SiteHeader />
         </AuthProvider>
         <div className="container-fluid">
-          <MoviesContextProvider>
-            <GenresContextProvider>
-              <AuthProvider>
-                <Switch>
-                  <PrivateRoute path="/profile" component={Profile} />
-                  <Route path="/signup" component={SignupPage} />
-                  <Route path="/signin" component={SigninPage} />
-                  <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                  <Route path="/reviews/:id" component={MovieReviewPage} />
-                  <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
-                  <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
-                  <Route path="/movies/:id" component={MoviePage} />
-                  <Route path="/" component={HomePage} />
-                  <Redirect from="*" to="/" />
-                </Switch>
-              </AuthProvider>
-            </GenresContextProvider>
-          </MoviesContextProvider>
+          <Provider store={store}>
+            <MoviesContextProvider>
+              <GenresContextProvider>
+                <AuthProvider>
+                  <Switch>
+                    <PrivateRoute path="/profile" component={Profile} />
+                    <Route path="/signup" component={SignupPage} />
+                    <Route path="/signin" component={SigninPage} />
+                    <Route exact path="/reviews/form" component={AddMovieReviewPage} />
+                    <Route path="/reviews/:id" component={MovieReviewPage} />
+                    <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
+                    <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
+                    <Route path="/movies/:id" component={MoviePage} />
+                    <Route path="/" component={HomePage} />
+                    <Redirect from="*" to="/" />
+                  </Switch>
+                </AuthProvider>
+              </GenresContextProvider>
+            </MoviesContextProvider>
+          </Provider>
         </div>
       </div>
     </BrowserRouter>
