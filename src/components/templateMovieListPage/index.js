@@ -4,7 +4,7 @@ import MovieList from "../movieList";
 import FilterControls from "../filterControls";
 import Pagination from '../pagination'
 
-const MovieListPageTemplate = ({movies, title, action, handleNavigation}) => {
+const MovieListPageTemplate = ({movies, title, action, handleNavigation, type}) => {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genre = Number(genreFilter)
@@ -31,7 +31,7 @@ const MovieListPageTemplate = ({movies, title, action, handleNavigation}) => {
         action={action}
         movies={displayedMovies}
       ></MovieList>
-      <Pagination handleNavigation={handleNavigation} />
+      <Pagination handleNavigation={handleNavigation} type={type} />
     </>
   );
 };

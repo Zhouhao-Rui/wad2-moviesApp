@@ -20,6 +20,7 @@ const MovieListPage = () => {
           return <AddToFavoriteButton movie={movie} />
         }}
         handleNavigation={context.homeNavigation}
+        type="movie"
       />
     </>
   );
