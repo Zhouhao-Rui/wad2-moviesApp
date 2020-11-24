@@ -8,7 +8,7 @@ const initialState = Map({
 const movieReducer = (state=initialState, action) => {
   switch(action.type) {
     case CHANGE_FAVORITE_MOVIES:
-      return state.set("favorites", action.favorites)
+      return state.update("favorites", item => item.concat(action.favorites))
     default:
       return state
   }
