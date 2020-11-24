@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
-import { useDispatch } from "react-redux";
-import { changeMoviesAction } from '../components/store/actionCreators'
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction } from '../components/store/actionCreators'
 
 export const MoviesContext = React.createContext(null)
 
@@ -47,8 +47,10 @@ const reducer = (state, action) => {
 // wrap the value in one Function
 const MoviesContextProvider = props => {
 
-  const [homePage, setHomePage] = useState(1)
-  const [upcomingPage, setUpcomingPage] = useState(1)
+  const {homePage, upcomingPage} = useSelector(state => ({
+    homePage: state.getIn(["movies", "homePage"]),
+    upcomingPage: state.getIn(["movies", "upcomingPage"])
+  }), shallowEqual)
 
   const Reduxdispatch = useDispatch()
 
@@ -82,11 +84,11 @@ const MoviesContextProvider = props => {
   }
 
   const homeNavigation = (currentPage) => {
-    setHomePage(currentPage)
+    Reduxdispatch(changeHomePageAction(currentPage))
   }
 
   const upcomingNavigation = (currentPage) => {
-    setUpcomingPage(currentPage)
+    Reduxdispatch(changeUpcomingPageAction(currentPage))
   }
 
   useEffect(() => {

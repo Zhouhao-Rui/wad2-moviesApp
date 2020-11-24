@@ -18,6 +18,7 @@ const UpcomingMoviesPage = () => {
         <AddWatchList movie={movie} />
       ))}
       handleNavigation={context.upcomingNavigation}
+      type="upcoming"
     />
   )
 }
