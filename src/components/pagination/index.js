@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { changeUpcomingCurrentPage, changeMovieCurrentPage, changeUpcomingPageNums, changeMoviePageNums } from '../store/actionCreators'
 
@@ -12,7 +12,7 @@ function Pagination({ handleNavigation, type }) {
   const dispatch = useDispatch()
 
   const nextNavigation = () => {
-    if (type == 'movie') {
+    if (type === 'movie') {
       dispatch(changeMovieCurrentPage(currentMoviePage + 1))
       handleNavigation(currentMoviePage + 1)
 
@@ -32,7 +32,7 @@ function Pagination({ handleNavigation, type }) {
     if ((currentUpcomingPage <= 1) || (currentMoviePage <= 1)) {
       return
     }
-    if (type == 'movie') {
+    if (type === 'movie') {
       dispatch(changeMovieCurrentPage(currentMoviePage - 1))
       handleNavigation(currentMoviePage - 1)
       const new_pageNums = moviePageNums && moviePageNums.map(num => num - 1)
@@ -47,7 +47,7 @@ function Pagination({ handleNavigation, type }) {
   }
 
   const navigateToPage = (num) => {
-    if (type == 'movie') {
+    if (type === 'movie') {
       dispatch(changeMovieCurrentPage(num))
       handleNavigation(num)
     } else {
@@ -61,7 +61,7 @@ function Pagination({ handleNavigation, type }) {
       <ul className="pagination">
         <li className="page-item"><p className="page-link" onClick={e => prevNavigation()}>Previous</p></li>
         {
-          type == 'movie' ? moviePageNums && moviePageNums.map((num, index) => {
+          type === 'movie' ? moviePageNums && moviePageNums.map((num, index) => {
             if (num === currentMoviePage) {
               return <li className="page-item active" key={index}><p className="page-link">{num}</p></li>
             }

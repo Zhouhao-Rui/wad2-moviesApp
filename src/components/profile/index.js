@@ -1,17 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import "../../globals/fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MoviesContext } from '../../contexts/moviesContext'
 import { useAuth } from '../../contexts/authContext'
 import { Link } from 'react-router-dom';
+import {useSelector, shallowEqual} from 'react-redux'
 
 library.add(faUserCircle)
 function Profile() {
-  const { movies } = useContext(MoviesContext)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const favorites = movies.filter(movie => movie.favorite)
+  const { favorites } = useSelector(state => ({
+    favorites: state.getIn(["movies", "favorites"])
+  }), shallowEqual)
   const { currentUser } = useAuth()
 
   const forwardIndex = (index) => {
@@ -53,7 +54,8 @@ function Profile() {
             <ol>
               {favorites.map(movie => {
                 return <li key={movie.id}>{movie.title}</li>
-              })}
+              }).slice(0, 5)}
+              ...
             </ol>
             <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">

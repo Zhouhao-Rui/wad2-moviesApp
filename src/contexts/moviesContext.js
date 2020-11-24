@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction } from '../components/store/actionCreators'
