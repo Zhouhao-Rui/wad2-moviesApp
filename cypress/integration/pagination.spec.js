@@ -51,7 +51,7 @@ describe('Pagination test', () => {
       cy.get('.card').should('have.length', 18)
     })
   })
-  
+
   describe('Upcoming page pagination test', () => {
     beforeEach(() => {
       cy.visit('/movies/upcoming')
@@ -101,6 +101,30 @@ describe('Pagination test', () => {
         expect($el).to.have.class('active')
       })
       cy.get('.card').should('have.length', 18)
+    })
+  })
+
+  describe('Floating buttons test', () => {
+    beforeEach(() => {
+      cy.visit('/movies/upcoming')
+    })
+    it('should not have circle button when no watch list movies', () => {
+      cy.get('[data-cy=floating-window]').click()
+      cy.get('[data-cy=floating-window]').find('div').each($el => {
+        expect($el).not.to.have.class('circle')
+      })
+    });
+    it('should have two circle buttons when having one watch list movie', () => {
+      cy.get('.btn').eq(0).click()
+      cy.get('[data-cy=floating-window]').click()
+      cy.get('.circle').should('have.length', 2)
+    })
+    it('should have three circle buttons when having more than two watch list movie', () => {
+      cy.get('.btn').eq(0).click()
+      cy.get('.btn').eq(1).click()
+      cy.get('.btn').eq(2).click()
+      cy.get('[data-cy=floating-window]').click()
+      cy.get('.circle').should('have.length', 3)
     })
   })
 })
