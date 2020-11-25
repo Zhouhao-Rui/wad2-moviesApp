@@ -19,6 +19,7 @@ import SignupPage from './pages/signupPage'
 import { Provider } from 'react-redux'
 import store from "./store";
 import FloatingButton from "./components/floatingButton";
+import WatchListPage from "./pages/watchListPage";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
                     <Route path="/signin" component={SigninPage} />
                     <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                     <Route path="/reviews/:id" component={MovieReviewPage} />
+                    <Route path="/movies/watchLists" component={WatchListPage} />
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
