@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction } from '../components/store/actionCreators'
+import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction, changeWatchListAction } from '../components/store/actionCreators'
 
 export const MoviesContext = React.createContext(null)
 
@@ -68,6 +68,7 @@ const MoviesContextProvider = props => {
 
   const addToMovieList = (movieId) => {
     const index = state.upcoming.map(movie => movie.id).indexOf(movieId)
+    Reduxdispatch(changeWatchListAction(state.upcoming[index]))
     dispatch({ type: 'add-movieList', payload: { movie: state.upcoming[index] } })
   }
 
