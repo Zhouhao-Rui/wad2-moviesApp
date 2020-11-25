@@ -14,6 +14,7 @@ function FloatingButton() {
   const [show, setShow] = useState(false)
   return (
     <div style={{ position: "fixed", right: 0, bottom: 0 }}
+      data-cy="floating-window"
       onClick={() => (
         setShow(!show)
       )}>

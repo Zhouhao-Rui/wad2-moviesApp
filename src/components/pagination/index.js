@@ -62,21 +62,21 @@ function Pagination({ handleNavigation, type }) {
   return (
     <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-4" style={{ cursor: "pointer" }}>
       <ul className="pagination">
-        <li className="page-item"><p className="page-link" onClick={e => prevNavigation()}>Previous</p></li>
+        <li className="page-item"><p className="page-link" data-cy="pre-link" onClick={e => prevNavigation()}>Previous</p></li>
         {
           type === 'movie' ? moviePageNums && moviePageNums.map((num, index) => {
             if (num === currentMoviePage) {
-              return <li className="page-item active" key={index}><p className="page-link">{num}</p></li>
+              return <li className="page-item active" key={index} data-cy="page-active"><p className="page-link">{num}</p></li>
             }
             return <li className="page-item" key={index}><p className="page-link" onClick={e => navigateToPage(num)}>{num}</p></li>
           }) : upcomingPageNums && upcomingPageNums.map((num, index) => {
             if (num === currentUpcomingPage) {
-              return <li className="page-item active" key={index}><p className="page-link">{num}</p></li>
+              return <li className="page-item active" data-cy="page-active" key={index}><p className="page-link">{num}</p></li>
             }
             return <li className="page-item" key={index}><p className="page-link" onClick={e => navigateToPage(num)}>{num}</p></li>
           })
         }
-        <li className="page-item"><p className="page-link" onClick={e => nextNavigation()}>Next</p></li>
+        <li className="page-item"><p className="page-link" data-cy="next-link" onClick={e => nextNavigation()}>Next</p></li>
       </ul>
     </nav>
   )
