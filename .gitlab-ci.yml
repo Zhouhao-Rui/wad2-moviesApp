@@ -5,7 +5,8 @@ image: cypress/browsers:node12.0.0-chrome73
 stages:
   - install
   - build
-  - test
+  - prod_test
+  - devel_test
 
 variables:
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
@@ -40,7 +41,7 @@ bundle_app:
       - build/
 
 production_test:    
-  stage: test
+  stage: prod_test
   only:
     - staging
   before_script:
@@ -51,7 +52,7 @@ production_test:
     - npm run start:ci
 
 development_test:
-  stage: test
+  stage: devel_test
   only:
     - staging
   script:

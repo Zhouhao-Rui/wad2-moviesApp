@@ -42,6 +42,7 @@ describe('Auth test', () => {
   
     it('should redirect to login page when click Add to favorite', () => {
       cy.get(".btn").eq(0).click()
+      cy.wait(2000)
       cy.url().should("match", /signin/)
     });
   
@@ -115,6 +116,7 @@ describe('Auth test', () => {
     before(() => {
       cy.visit('/')
       cy.get('[data-cy=logout]').click()
+      cy.wait(2000)
       cy.get('[data-cy=signin]').click()
     })
   

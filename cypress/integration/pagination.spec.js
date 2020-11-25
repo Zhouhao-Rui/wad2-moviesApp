@@ -1,38 +1,53 @@
 const movieName = "Mulan"
 const upcomingMovieName = "Freaky"
 
+Cypress.Commands.add('currentPageTest', (name) => {
+  cy.get('[data-cy=page-active]').click()
+  cy.get('.card-body').find(`.card-title:contains(${name})`).should('have.length', 1)
+})
+
+Cypress.Commands.add('specificPageTest', (name) => {
+  cy.get('.page-link').eq(2).click()
+  cy.wait(2000)
+  cy.get('.page-item').eq(2).each($el => {
+    expect($el).to.have.class('active')
+  })
+  cy.get('.card-body').each($el => {
+    cy.wrap($el).find('.card-title').should('not.contain', name)
+  })
+})
+
+Cypress.Commands.add('nextLinkTest', (name) => {
+  cy.get('[data-cy=next-link]').click()
+  cy.wait(2000)
+  cy.get('.card-body').each($el => {
+    cy.wrap($el).find('.card-title').should('not.contain', name)
+  })
+})
+
+Cypress.Commands.add('preLinkTest', (name) => {
+  cy.get('[data-cy=next-link]').click()
+  cy.wait(2000)
+  cy.get('[data-cy=pre-link]').click()
+  cy.wait(2000)
+  cy.get('.card-body').find(`.card-title:contains(${name})`).should('have.length', 1)
+})
 describe('Pagination test', () => {
   describe('Home page pagination test', () => {
     beforeEach(() => {
       cy.visit('/')
     })
     it('should still show the current page after clicking the current page link', () => {
-      cy.get('[data-cy=page-active]').click()
-      cy.get('.card-body').find(`.card-title:contains(${movieName})`).should('have.length', 1)
+      cy.currentPageTest(movieName)
     })
     it('should show the specific page after clicking the specific page link', () => {
-      cy.get('.page-link').eq(2).click()
-      cy.wait(2000)
-      cy.get('.page-item').eq(2).each($el => {
-        expect($el).to.have.class('active')
-      })
-      cy.get('.card-body').each($el => {
-        cy.wrap($el).find('.card-title').should('not.contain', movieName)
-      })
+      cy.specificPageTest(movieName)
     });
     it('should show the next page data after clicking the next link', () => {
-      cy.get('[data-cy=next-link]').click()
-      cy.wait(2000)
-      cy.get('.card-body').each($el => {
-        cy.wrap($el).find('.card-title').should('not.contain', movieName)
-      })
+      cy.nextLinkTest(movieName)
     })
     it('should show the previous page data after clicking the previous link', () => {
-      cy.get('[data-cy=next-link]').click()
-      cy.wait(2000)
-      cy.get('[data-cy=pre-link]').click()
-      cy.wait(2000)
-      cy.get('.card-body').find(`.card-title:contains(${movieName})`).should('have.length', 1)
+      cy.preLinkTest(movieName)
     })
     it('should support add favorite movies from different page and the current page keep alive in the website', () => {
       cy.get('.btn').eq(0).click()
@@ -54,35 +69,20 @@ describe('Pagination test', () => {
 
   describe('Upcoming page pagination test', () => {
     beforeEach(() => {
-      cy.visit('/movies/upcoming')
+      cy.visit('/')
+      cy.get('.nav-link').eq(1).click()
     })
     it('should still show the current page after clicking the current page link', () => {
-      cy.get('[data-cy=page-active]').click()
-      cy.get('.card-body').find(`.card-title:contains(${upcomingMovieName})`).should('have.length', 1)
+      cy.currentPageTest(upcomingMovieName)
     })
     it('should show the specific page after clicking the specific page link', () => {
-      cy.get('.page-link').eq(2).click()
-      cy.wait(2000)
-      cy.get('.page-item').eq(2).each($el => {
-        expect($el).to.have.class('active')
-      })
-      cy.get('.card-body').each($el => {
-        cy.wrap($el).find('.card-title').should('not.contain', upcomingMovieName)
-      })
+      cy.specificPageTest(upcomingMovieName)
     });
     it('should show the next page data after clicking the next link', () => {
-      cy.get('[data-cy=next-link]').click()
-      cy.wait(2000)
-      cy.get('.card-body').each($el => {
-        cy.wrap($el).find('.card-title').should('not.contain', upcomingMovieName)
-      })
+      cy.nextLinkTest(upcomingMovieName)
     })
     it('should show the previous page data after clicking the previous link', () => {
-      cy.get('[data-cy=next-link]').click()
-      cy.wait(2000)
-      cy.get('[data-cy=pre-link]').click()
-      cy.wait(2000)
-      cy.get('.card-body').find(`.card-title:contains(${upcomingMovieName})`).should('have.length', 1)
+      cy.preLinkTest(upcomingMovieName)
     })
     it('should support add watch list movies from different page and the current page keep alive in the website', () => {
       cy.get('.btn').eq(0).click()
@@ -106,7 +106,8 @@ describe('Pagination test', () => {
 
   describe('Floating buttons test', () => {
     beforeEach(() => {
-      cy.visit('/movies/upcoming')
+      cy.visit('/')
+      cy.get('.nav-link').eq(1).click()
     })
     it('should not have circle button when no watch list movies', () => {
       cy.get('[data-cy=floating-window]').click()
