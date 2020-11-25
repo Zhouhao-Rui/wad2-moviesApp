@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBox } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, shallowEqual } from 'react-redux'
 import WatchLists from "./childrenComponents/WatchLists";
+import { CSSTransition } from 'react-transition-group'
 
 library.add(faBox)
 function FloatingButton() {
@@ -21,7 +22,13 @@ function FloatingButton() {
         icon={["fas", "box"]}
         size="4x"
       />
-      {show && <WatchLists watchLists={watchLists} />}
+      <CSSTransition 
+        in={show}
+        unmountOnExit={true}
+        timeout={1000}
+        classNames="watchLists">
+        <WatchLists watchLists={watchLists} />
+      </CSSTransition>
     </div>
   )
 }
