@@ -18,6 +18,7 @@ import SigninPage from './pages/signinPage'
 import SignupPage from './pages/signupPage'
 import { Provider } from 'react-redux'
 import store from "./store";
+import FloatingButton from "./components/floatingButton";
 
 const App = () => {
   return (
@@ -47,6 +48,7 @@ const App = () => {
               </GenresContextProvider>
             </MoviesContextProvider>
           </div>
+          <FloatingButton />
         </div>
       </BrowserRouter>
     </Provider>
