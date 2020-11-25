@@ -22,12 +22,16 @@ function FloatingButton() {
         icon={["fas", "box"]}
         size="4x"
       />
-      <CSSTransition 
+      <CSSTransition
         in={show}
         unmountOnExit={true}
         timeout={1000}
         classNames="watchLists">
-        <WatchLists watchLists={watchLists} />
+        {watchLists.length > 0 ?
+          <WatchLists watchLists={watchLists} />
+          :
+          <div></div>
+        }
       </CSSTransition>
     </div>
   )
