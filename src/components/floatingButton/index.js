@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBox } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, shallowEqual } from 'react-redux'
 import WatchLists from "./childrenComponents/WatchLists";
 import { CSSTransition } from 'react-transition-group'
 
-library.add(faBox)
+library.add(faPlusCircle)
 function FloatingButton() {
   const { watchLists } = useSelector(state => ({
     watchLists: state.getIn(["movies", "watchLists"])
@@ -19,7 +19,7 @@ function FloatingButton() {
       )}>
       <FontAwesomeIcon
         className="text-dark"
-        icon={["fas", "box"]}
+        icon={["fas", "plus-circle"]}
         size="4x"
       />
       <CSSTransition
