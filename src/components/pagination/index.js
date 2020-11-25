@@ -29,15 +29,18 @@ function Pagination({ handleNavigation, type }) {
   }
 
   const prevNavigation = () => {
-    if ((currentUpcomingPage <= 1) || (currentMoviePage <= 1)) {
-      return
-    }
     if (type === 'movie') {
+      if (currentMoviePage <= 1) {
+        return
+      }
       dispatch(changeMovieCurrentPage(currentMoviePage - 1))
       handleNavigation(currentMoviePage - 1)
       const new_pageNums = moviePageNums && moviePageNums.map(num => num - 1)
       dispatch(changeMoviePageNums(new_pageNums))
     } else {
+      if (currentUpcomingPage <= 1){
+        return 
+      }
       dispatch(changeUpcomingCurrentPage(currentUpcomingPage - 1))
       handleNavigation(currentUpcomingPage - 1)
       const new_pageNums = upcomingPageNums && upcomingPageNums.map(num => num - 1)
@@ -54,7 +57,7 @@ function Pagination({ handleNavigation, type }) {
       dispatch(changeUpcomingCurrentPage(num))
       handleNavigation(num)
     }
-    
+
   }
   return (
     <nav aria-label="Page navigation example" className="d-flex justify-content-center mt-4" style={{ cursor: "pointer" }}>
