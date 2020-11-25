@@ -31,7 +31,7 @@ const MovieListPageTemplate = ({movies, title, action, handleNavigation, type}) 
         action={action}
         movies={displayedMovies}
       ></MovieList>
-      <Pagination handleNavigation={handleNavigation} type={type} />
+      {handleNavigation && <Pagination handleNavigation={handleNavigation} type={type} /> }
     </>
   );
 };
