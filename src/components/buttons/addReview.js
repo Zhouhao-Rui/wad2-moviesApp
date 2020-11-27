@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ReviewButton = ({ movie, index }) => {
+const ReviewButton = ({ movie, index, type }) => {
   return (
     <Link
       className="btn w-100 btn-primary "
@@ -9,7 +9,8 @@ const ReviewButton = ({ movie, index }) => {
         pathname: `/reviews/form`,
         state: {
           movie: movie, 
-          index: index
+          index: index,
+          type: type
         }
       }}
     >

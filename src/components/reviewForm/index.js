@@ -4,9 +4,9 @@ import useForm from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
 import {useDispatch} from 'react-redux'
-import { addReviewAction } from "../store/actionCreators";
+import { addFavorReviewAction, addWatchListReviewAction } from "../store/actionCreators";
 
-const ReviewForm = ({ movie, index, history }) => {
+const ReviewForm = ({ movie, index, type, history }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
 
@@ -14,8 +14,13 @@ const ReviewForm = ({ movie, index, history }) => {
 
   const onSubmit = data => {
     context.addReview(movie, data)
-    dispatch(addReviewAction(data, index))
-    history.push("/movies/favorites");
+    if (type === 'favorites') {
+      dispatch(addFavorReviewAction(data, index))
+      history.push("/movies/favorites");
+    }else {
+      dispatch(addWatchListReviewAction(data, index))
+      history.push("/movies/watchLists");
+    }
   };
 
   return (
