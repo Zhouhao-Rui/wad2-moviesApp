@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
@@ -6,11 +7,23 @@ import { excerpt } from "../../util";
 const MovieReviews = ({ movie }) => {
   const [reviews, setReviews] = useState([])
 
+  // get the movies with reviews
+  const {favorites} = useSelector(state => ({
+    favorites: state.getIn(['movies', 'favorites'])
+  }))
+
+  // find the movie
+  const reviewMovie = favorites.find(item => item.id === movie.id)
+
   useEffect(() => {
     getMovieReviews(movie.id).then(reviews => {
-      setReviews(reviews)
+      reviewMovie 
+      ? 
+      setReviews([...reviews, ...reviewMovie.review])
+      :
+      setReviews([...reviews])
     })
-  }, [movie.id])
+  }, [movie.id, reviewMovie])
 
   return (
     <table className="table table-striped table-bordered table-hover">

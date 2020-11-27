@@ -3,13 +3,18 @@ import "./reviewForm.css";
 import useForm from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { addReviewAction } from "../store/actionCreators";
 
-const ReviewForm = ({ movie, history }) => {
+const ReviewForm = ({ movie, index, history }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
 
+  const dispatch = useDispatch()
+
   const onSubmit = data => {
     context.addReview(movie, data)
+    dispatch(addReviewAction(data, index))
     history.push("/movies/favorites");
   };
 
