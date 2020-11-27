@@ -5,7 +5,7 @@ function SecondaryListItem({items}) {
   return (
     <>
       {items.map((item, index) => (
-        <ListItemText>- {item}</ListItemText>
+        <ListItemText key={index}>- {item}</ListItemText>
       ))}
     </>
   )

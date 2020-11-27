@@ -12,14 +12,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import MovieIcon from '@material-ui/icons/Movie';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 
-import SecondaryListItem from './SecondaryListItem'
+import ItemList from './ItemList';
 
 const drawerWidth = 240;
 
@@ -54,10 +53,6 @@ function SideBar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
-  const [movieOpen, setMovieOpen] = React.useState(false)
-  const [TVOpen, setTVOpen] = React.useState(false)
-  const [collectionOpen, setCollectionOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,30 +97,9 @@ function SideBar() {
             </ListItemIcon>
             <Input />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <MovieIcon />
-            </ListItemIcon>
-            <ListItemText primary="Movie" onClick={() => setMovieOpen(!movieOpen)} secondary={movieOpen ? SecondaryListItem({
-              items: ['sub1', 'sub2', 'sub3']
-            }) : []} />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <LiveTvIcon />
-            </ListItemIcon>
-            <ListItemText primary="TV" onClick={() => setTVOpen(!TVOpen)} secondary={TVOpen ? SecondaryListItem({
-              items: ['sub1', 'sub2', 'sub3']
-            }) : []} />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <VideoLibraryIcon />
-            </ListItemIcon>
-            <ListItemText primary="Collection list" onClick={() => setCollectionOpen(!collectionOpen)} secondary={collectionOpen ? SecondaryListItem({
-              items: ['sub1', 'sub2', 'sub3']
-            }) : []} />
-          </ListItem>
+          <ItemList icon={<MovieIcon />} primaryText="Movie" items={['1', '2', '3']} />
+          <ItemList icon={<LiveTvIcon />} primaryText="TV" items={["1", "2", "3"]} />
+          <ItemList icon={<VideoLibraryIcon />} primaryText="Collection" items={["1", "2", "3"]} />
         </List>
       </Drawer>
     </>
