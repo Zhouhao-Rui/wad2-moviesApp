@@ -12,7 +12,7 @@ const WatchListPage = () => {
     <PageTemplate
       movies={watchLists}
       title={"Watch List Movies"}
-      action={movie => <AddReviewButton movie={movie} />}
+      action={(movie, index) => <AddReviewButton movie={movie} index={index} type="watchList" />}
     />
   );
 }

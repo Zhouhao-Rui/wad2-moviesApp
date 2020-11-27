@@ -8,22 +8,20 @@ const MovieReviews = ({ movie }) => {
   const [reviews, setReviews] = useState([])
 
   // get the movies with reviews
-  const {favorites} = useSelector(state => ({
-    favorites: state.getIn(['movies', 'favorites'])
+  const { favorites, watchLists } = useSelector(state => ({
+    favorites: state.getIn(['movies', 'favorites']),
+    watchLists: state.getIn(['movies', 'watchLists'])
   }))
 
   // find the movie
-  const reviewMovie = favorites.find(item => item.id === movie.id)
+  const reviewFavorMovie = favorites.find(item => item.id === movie.id) || { review: [] }
+  const reviewWatchListMovie = watchLists.find(item => item.id === movie.id) || { review: [] }
 
   useEffect(() => {
     getMovieReviews(movie.id).then(reviews => {
-      reviewMovie 
-      ? 
-      setReviews([...reviews, ...reviewMovie.review])
-      :
-      setReviews([...reviews])
+      setReviews([...reviews, ...reviewFavorMovie.review, ...reviewWatchListMovie.review])
     })
-  }, [movie.id, reviewMovie])
+  }, [movie.id, reviewFavorMovie, reviewWatchListMovie])
 
   return (
     <table className="table table-striped table-bordered table-hover">
@@ -50,8 +48,8 @@ const MovieReviews = ({ movie }) => {
                       movie: movie
                     }
                   }}
-                  >
-                    Full Review
+                >
+                  Full Review
                   </Link>
               </td>
             </tr>

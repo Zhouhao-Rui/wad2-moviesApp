@@ -82,6 +82,7 @@ const MoviesContextProvider = props => {
 
   const getUpcomingMoviesByPage = (page) => {
     getUpcomingMovies(page).then(movies => {
+      movies.map(movie => movie.review = [])
       dispatch({ type: "load-upcoming", payload: { movies } });
     })
   }
