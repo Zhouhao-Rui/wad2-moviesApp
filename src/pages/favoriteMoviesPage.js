@@ -12,7 +12,7 @@ const FavoriteMoviesPage = () => {
     <PageTemplate
       movies={favorites}
       title={"Favorite Movies"}
-      action={movie => <AddReviewButton movie={movie} />}
+      action={(movie, index) => <AddReviewButton movie={movie} index={index} />}
     />
   );
 }

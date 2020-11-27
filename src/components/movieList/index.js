@@ -6,7 +6,7 @@ export default memo(function movieList({movies, action}) {
   return (
     <div className="row movies bg-info">
       {movies.map((movie, index) => (
-        <Movie key={movie.id} movie={movie} action={action} />
+        <Movie key={movie.id} movie={movie} action={action} index={index} />
       ))}
     </div>
   )

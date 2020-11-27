@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../globals/fontawesome"
 import { Link } from 'react-router-dom'
 
-export default memo(function MovieCard({ movie, action }) {
+export default memo(function MovieCard({ movie, action, index }) {
   return (
     <div className="col-sm-3">
       <div className="card bg-white">
@@ -30,7 +30,7 @@ export default memo(function MovieCard({ movie, action }) {
           </p>
         </div>
         <div className="card-footer">
-          {action(movie)}
+          {action(movie, index)}
         </div>
       </div>
     </div>
