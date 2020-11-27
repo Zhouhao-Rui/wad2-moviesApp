@@ -1,4 +1,4 @@
-import {CHANGE_FAVORITE_MOVIES, CHANGE_WATCH_LISTS, CHANGE_MOVIE_CURRENT_PAGE, CHANGE_UPCOMING_PAGE_NUMS, CHANGE_MOVIE_PAGE_NUMS, CHANGE_HOME_PAGE, CHANGE_UPCOMING_PAGE, CHANGE_UPCOMING_CURRENT_PAGE} from './constants'
+import {CHANGE_FAVORITE_MOVIES, ADD_REVIEWS, CHANGE_WATCH_LISTS, CHANGE_MOVIE_CURRENT_PAGE, CHANGE_UPCOMING_PAGE_NUMS, CHANGE_MOVIE_PAGE_NUMS, CHANGE_HOME_PAGE, CHANGE_UPCOMING_PAGE, CHANGE_UPCOMING_CURRENT_PAGE} from './constants'
 
 export const changeMoviesAction = (movie) => ({
   type: CHANGE_FAVORITE_MOVIES,
@@ -38,5 +38,11 @@ export const changeUpcomingCurrentPage = (currentPage) => ({
 export const changeWatchListAction = (movie) => ({
   type: CHANGE_WATCH_LISTS,
   watchLists: movie
+})
+
+export const addReviewAction = (review, index) => ({
+  type: ADD_REVIEWS,
+  review,
+  index
 })
 
