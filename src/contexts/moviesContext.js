@@ -74,6 +74,8 @@ const MoviesContextProvider = props => {
 
   const getMoviesByPage = (page) => {
     getMovies(page).then(movies => {
+      // add reviews at first
+      movies.map(movie => movie.review = [])
       dispatch({ type: 'load', payload: { movies } })
     })
   }
