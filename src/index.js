@@ -29,7 +29,7 @@ const App = () => {
           <AuthProvider>
             <SiteHeader />
           </AuthProvider>
-          <div className="container-fluid">
+          <div className="container-fluid mt-3">
             <MoviesContextProvider>
               <GenresContextProvider>
                 <AuthProvider>

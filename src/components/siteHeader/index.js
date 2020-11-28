@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 
 import { useAuth } from '../../contexts/authContext'
+import SideBar from "../sidebar";
 
 const SiteHeader = ({ history }) => {
   const { signout, currentUser } = useAuth()
+
   return (
     <nav className="navbar fixed-top navbar-light bg-dark">
       <nav className="navbar-brand text-white">
-        <Link className="text-white" to="/">
-          TMDB Client
-        </Link>
+        <SideBar />
       </nav>
       <FontAwesomeIcon
         className="navbar-text text-light"
@@ -72,8 +72,8 @@ const SiteHeader = ({ history }) => {
               <p data-cy="logout" className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
                 logOut
             </p>
-            </li>
-          </>
+              </li>
+            </>
           }
         </ul>
       </nav>
