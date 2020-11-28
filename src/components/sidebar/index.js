@@ -21,7 +21,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import { searchMedia } from '../../api/tmdb-api'
 import useDebounce from '../../hooks/useDebounce'
-import MediaCard from './mediaCard'
+import Carousel from '../carousel';
 
 const drawerWidth = 240;
 
@@ -58,7 +58,6 @@ function SideBar() {
   const [open, setOpen] = React.useState(false);
 
   /** search */
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [searchItem, setSearchItem] = useState('')
   const [medias, setMedias] = useState([])
   const [isSearching, setIsSearching] = useState(false)
@@ -84,28 +83,6 @@ function SideBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const forwardIndex = (index) => {
-    if (index < medias.length - 1) {
-      setCurrentIndex(index + 1)
-    } else if (index === medias.length - 1) {
-      setCurrentIndex(0)
-    }
-  }
-
-  const forward = () => {
-    console.log(currentIndex)
-    forwardIndex(currentIndex)
-  }
-
-  const backward = () => {
-    console.log(currentIndex)
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
-    } else if (currentIndex === 0) {
-      setCurrentIndex(medias.length - 1)
-    }
-  }
 
   return (
     <>
@@ -148,28 +125,8 @@ function SideBar() {
           <ItemList icon={<VideoLibraryIcon />} primaryText="Collection" items={["1", "2", "3"]} />
         </List>
         {isSearching && <h5>is Searching</h5>}
-
-        <div id="carouselExampleIndicators" className="carousel slide mt-5" data-ride="carousel">
-          <div className="carousel-inner">
-            {medias.map((media, index) => (
-              index === currentIndex ?
-                <div className="carousel-item active" key={media.id}>
-                  <MediaCard media={media} />
-                </div>
-                :
-                <div className="carousel-item" key={media.id}>
-                  <MediaCard media={media} />
-                </div>
-            ))}
-          </div>
-          <p className="carousel-control-prev" role="button" data-slide="prev" onClick={backward}>
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="sr-only">Previous</span>
-          </p>
-          <p className="carousel-control-next" role="button" data-slide="next" onClick={forward}>
-            <span className="carousel-control-next-icon text-dark" aria-hidden="true"></span>
-            <span className="sr-only">Next</span>
-          </p>
+        <div className="mt-5">
+          <Carousel items={medias} />
         </div>
       </Drawer>
     </>
