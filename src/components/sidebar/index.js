@@ -94,7 +94,7 @@ function SideBar() {
           edge="start"
           className={clsx(classes.menuButton, open && classes.hide)}
         >
-          <MenuIcon />
+          <MenuIcon data-cy="menu" />
         </IconButton>
       </Toolbar>
       <Drawer
@@ -118,7 +118,7 @@ function SideBar() {
             <ListItemIcon>
               <SearchIcon />
             </ListItemIcon>
-            <Input placeholder="search media..." onChange={e => setSearchItem(e.target.value)} />
+            <Input data-cy="searchInput" placeholder="search media..." onChange={e => setSearchItem(e.target.value)} />
           </ListItem>
           <ItemList icon={<MovieIcon />} primaryText="Movie" items={['All movie', 'Upcoming movie', 'Favorite Moive']} links={["/", "/movies/upcoming", "/movies/favorites"]} />
           <ItemList icon={<LiveTvIcon />} primaryText="TV" items={["1", "2", "3"]} />

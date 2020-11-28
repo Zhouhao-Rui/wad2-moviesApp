@@ -38,18 +38,15 @@ describe('Navigation', () => {
     })
     it("should allow navigation from site header", () => {
       cy.get("nav").find("li").eq(2).find("a").click()
-      cy.url().should("include", "/favorites")
-      cy.get("h2").contains("Favorite Movies");
-      cy.get("nav").find("li").eq(0).find("a").click()
+      cy.url().should("include", "/upcoming")
+      cy.get("h2").contains("Upcoming Movies");
+      cy.get("nav").find("li").eq(1).find("a").click()
       cy.url().should("eq", "http://localhost:3000/")
       cy.get("h2").contains("No. Movies");
-      cy.get("nav").find("li").eq(1).find("a").click();
-      cy.url().should("include", `/upcoming`);
-      cy.get("h2").contains("Upcoming Movies");
+      cy.get("nav").find("li").eq(3).find("a").click();
+      cy.url().should("include", `/favorites`);
+      cy.get("h2").contains("Favorite Movies");
       cy.get("nav").find("li").eq(2).find("a").click();
-      cy.get("nav.navbar-brand").find("a").click();
-      cy.url().should("eq", "http://localhost:3000/");
-      cy.get("h2").contains("No. Movies");
     })
   })
   
@@ -79,7 +76,7 @@ describe('Navigation', () => {
     beforeEach(() => {
       cy.visit("/");
       cy.get(".card").eq(0).find("button").click();
-      cy.get("nav").find("li").eq(2).find("a").click();
+      cy.get("nav").find("li").eq(3).find("a").click();
     });
     it("should navigate to the movies detail page and change the browser URL", () => {
       cy.get(".card").eq(0).find("img").click();

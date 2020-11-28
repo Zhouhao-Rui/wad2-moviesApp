@@ -37,7 +37,7 @@ describe('Home Page', () => {
       it("should display movies with 'p ' in the title", () => {
         const searchString = 'p'
         const matchingMovies = filterByTitle(movies, searchString );
-        cy.get("input").clear().type(searchString) ;
+        cy.get("[data-cy=headerInput]").clear().type(searchString) ;
         cy.get(".card").should("have.length", matchingMovies.length);
         cy.get(".card").each(($card, index) => {
           cy.wrap($card)
@@ -48,7 +48,7 @@ describe('Home Page', () => {
       it("should display movies with 'o' in the title", () => {
         const searchString = "o";
         const matchingMovies = filterByTitle(movies, searchString);
-        cy.get("input").clear().type(searchString);
+        cy.get("[data-cy=headerInput]").clear().type(searchString);
         cy.get(".card").should("have.length", matchingMovies.length);
         cy.get(".card").each(($card, index) => {
           cy.wrap($card)
@@ -60,7 +60,7 @@ describe('Home Page', () => {
         const searchString = "xyz"
         const matchingMovies = filterByTitle(movies, searchString)
         expect(matchingMovies).to.have.length(0)
-        cy.get("input").clear().type(searchString)
+        cy.get("[data-cy=headerInput]").clear().type(searchString)
         cy.get(".card").should("have.length", 0)
       })
     })
@@ -87,7 +87,7 @@ describe('Home Page', () => {
 
         const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectGenreId)
         // for title
-        cy.get('input').clear().type(searchString)
+        cy.get("[data-cy=headerInput]").clear().type(searchString)
         // for genreSelect
         cy.get('select').select(selectGenreText)
         cy.get('.card').should('have.length', matchingMovies.length)
@@ -105,7 +105,7 @@ describe('Home Page', () => {
         const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectGenreId)
         expect(matchingMovies).to.have.length(0)
         // for title
-        cy.get('input').clear().type(searchString)
+        cy.get("[data-cy=headerInput]").clear().type(searchString)
         // for genreSelect
         cy.get('select').select(selectGenreText)
         cy.get('.card').should('have.length', 0)

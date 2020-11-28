@@ -38,10 +38,9 @@ describe("Movie Details Page", () => {
   });
 
   it("should display the movie's details", () => {
-    cy.get("h4").contains("Overview");
+    cy.get("[data-cy=movieDetailOverView]").contains("Overview");
     cy.get("h4").next().contains(movie.overview);
-    cy.get("ul")
-      .eq(1)
+    cy.get("[data-cy=movieDetails]")
       .within(() => {
         cy.get("li").eq(0).contains("Runtime");
         cy.get("li").eq(1).contains(movie.runtime);

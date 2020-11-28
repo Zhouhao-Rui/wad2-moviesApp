@@ -24,6 +24,7 @@ export default memo(function FilterControls(props) {
         <h4>
           <span>List Filtering</span>
           <input
+            data-cy="headerInput"
             type="text"
             placeholder="Title Search"
             onChange={handleTextChange} />

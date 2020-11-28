@@ -1,5 +1,5 @@
-const movieName = "Mulan"
-const upcomingMovieName = "Freaky"
+let movieName
+let upcomingMovieName
 
 Cypress.Commands.add('currentPageTest', (name) => {
   cy.get('[data-cy=page-active]').click()
@@ -33,6 +33,26 @@ Cypress.Commands.add('preLinkTest', (name) => {
   cy.get('.card-body').find(`.card-title:contains(${name})`).should('have.length', 1)
 })
 describe('Pagination test', () => {
+  before(() => {
+    cy.request(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${Cypress.env(
+        "TMDB_KEY"
+      )}&language=en-US&include_adult=false&include_video=false&page=1`
+    )
+      .its("body")   
+      .then((response) => {
+        movieName = response.results[0].title
+    })
+    cy.request(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${Cypress.env(
+        "TMDB_KEY"
+      )}&language=en-US&include_adult=false&include_video=false&page=1`
+    )
+      .its("body")   
+      .then((response) => {
+        upcomingMovieName = response.results[0].title
+    })
+  })
   describe('Home page pagination test', () => {
     beforeEach(() => {
       cy.visit('/')

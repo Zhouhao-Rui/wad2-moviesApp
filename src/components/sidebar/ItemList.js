@@ -11,7 +11,7 @@ function ItemList({ icon, primaryText, items, links }) {
       <ListItemIcon>
         {icon}
       </ListItemIcon>
-      <ListItemText primary={primaryText} onClick={() => setOpen(!open)} secondaryTypographyProps={{component: 'div'}} secondary={open ? <SecondaryListItem items={items} links={links} /> : ''} />
+      <ListItemText data-cy="ListItem" primary={primaryText} onClick={() => setOpen(!open)} secondaryTypographyProps={{component: 'div'}} secondary={open ? <SecondaryListItem items={items} links={links} /> : ''} />
     </ListItem>
   )
 }

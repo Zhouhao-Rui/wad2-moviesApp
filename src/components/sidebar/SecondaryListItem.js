@@ -6,7 +6,7 @@ function SecondaryListItem({items, links}) {
   return (
     <>
       {items.map((item, index) => (
-        <ListItemText key={index}><Link to={links[index]} className="text-dark">- {item}</Link></ListItemText>
+        <ListItemText data-cy="secondaryListItem" key={index}><Link to={links[index]} className="text-dark">- {item}</Link></ListItemText>
       ))}
     </>
   )

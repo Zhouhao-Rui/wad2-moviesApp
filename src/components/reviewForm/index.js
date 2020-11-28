@@ -1,9 +1,9 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import "./reviewForm.css";
 import useForm from "react-hook-form";
-import {MoviesContext} from '../../contexts/moviesContext'
+import { MoviesContext } from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addFavorReviewAction, addWatchListReviewAction } from "../store/actionCreators";
 
 const ReviewForm = ({ movie, index, type, history }) => {
@@ -17,7 +17,7 @@ const ReviewForm = ({ movie, index, type, history }) => {
     if (type === 'favorites') {
       dispatch(addFavorReviewAction(data, index))
       history.push("/movies/favorites");
-    }else {
+    } else {
       dispatch(addWatchListReviewAction(data, index))
       history.push("/movies/watchLists");
     }
@@ -28,6 +28,7 @@ const ReviewForm = ({ movie, index, type, history }) => {
       <h3>Add your review</h3>
       <div className="form-group">
         <input
+          data-cy="reviewInput"
           type="text"
           className="form-control"
           placeholder="Author"

@@ -159,7 +159,7 @@ describe('Auth test', () => {
       cy.get(".btn").eq(2).click()
       cy.get('[data-cy=profile]').click()
       cy.url().should("match", /profile/)
-      cy.get('.carousel-img').should('have.length', 3)
+      cy.get('.carousel-item').should('have.length', 3)
     })
   })
   

@@ -4,9 +4,9 @@ import "./movieDetails.css";
 const movieDetails = ({ movie }) => {
   return (
     <>
-      <h4>Overview</h4>
+      <h4 data-cy="movieDetailOverView">Overview</h4>
       <p>{movie.overview}</p>
-      <ul className="list-group list-group-horizontal">
+      <ul data-cy="movieDetails" className="list-group list-group-horizontal">
         <li key="ruh" className="list-group-item list-group-item-dark">
           Runtime (min.)
         </li>
