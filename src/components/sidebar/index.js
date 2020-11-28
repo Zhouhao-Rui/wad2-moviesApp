@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 /** Material UI */
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -10,15 +10,18 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MovieIcon from '@material-ui/icons/Movie';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ItemList from './ItemList';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 
-import ItemList from './ItemList';
+import { searchMedia } from '../../api/tmdb-api'
+import useDebounce from '../../hooks/useDebounce'
+import MediaCard from './mediaCard'
 
 const drawerWidth = 240;
 
@@ -54,6 +57,26 @@ function SideBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  /** search */
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [searchItem, setSearchItem] = useState('')
+  const [medias, setMedias] = useState([])
+  const [isSearching, setIsSearching] = useState(false)
+
+  const debouncedSearchItem = useDebounce(searchItem, 500)
+
+  useEffect(() => {
+    if (debouncedSearchItem) {
+      setIsSearching(true)
+      searchMedia(debouncedSearchItem).then(res => {
+        setIsSearching(false)
+        setMedias(res)
+      })
+    } else {
+      setMedias([])
+    }
+  }, [debouncedSearchItem])
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -61,6 +84,28 @@ function SideBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const forwardIndex = (index) => {
+    if (index < medias.length - 1) {
+      setCurrentIndex(index + 1)
+    } else if (index === medias.length - 1) {
+      setCurrentIndex(0)
+    }
+  }
+
+  const forward = () => {
+    console.log(currentIndex)
+    forwardIndex(currentIndex)
+  }
+
+  const backward = () => {
+    console.log(currentIndex)
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1)
+    } else if (currentIndex === 0) {
+      setCurrentIndex(medias.length - 1)
+    }
+  }
 
   return (
     <>
@@ -85,6 +130,7 @@ function SideBar() {
         }}
       >
         <div className={classes.drawerHeader}>
+          <h4>TMDB WORLD</h4>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -95,12 +141,36 @@ function SideBar() {
             <ListItemIcon>
               <SearchIcon />
             </ListItemIcon>
-            <Input />
+            <Input placeholder="search media..." onChange={e => setSearchItem(e.target.value)} />
           </ListItem>
-          <ItemList icon={<MovieIcon />} primaryText="Movie" items={['1', '2', '3']} />
+          <ItemList icon={<MovieIcon />} primaryText="Movie" items={['All movie', 'Upcoming movie', 'Favorite Moive']} links={["/", "/movies/upcoming", "/movies/favorites"]} />
           <ItemList icon={<LiveTvIcon />} primaryText="TV" items={["1", "2", "3"]} />
           <ItemList icon={<VideoLibraryIcon />} primaryText="Collection" items={["1", "2", "3"]} />
         </List>
+        {isSearching && <h5>is Searching</h5>}
+
+        <div id="carouselExampleIndicators" className="carousel slide mt-5" data-ride="carousel">
+          <div className="carousel-inner">
+            {medias.map((media, index) => (
+              index === currentIndex ?
+                <div className="carousel-item active" key={media.id}>
+                  <MediaCard media={media} />
+                </div>
+                :
+                <div className="carousel-item" key={media.id}>
+                  <MediaCard media={media} />
+                </div>
+            ))}
+          </div>
+          <p className="carousel-control-prev" role="button" data-slide="prev" onClick={backward}>
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="sr-only">Previous</span>
+          </p>
+          <p className="carousel-control-next" role="button" data-slide="next" onClick={forward}>
+            <span className="carousel-control-next-icon text-dark" aria-hidden="true"></span>
+            <span className="sr-only">Next</span>
+          </p>
+        </div>
       </Drawer>
     </>
   )
