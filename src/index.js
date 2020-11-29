@@ -20,6 +20,7 @@ import { Provider } from 'react-redux'
 import store from "./store";
 import FloatingButton from "./components/floatingButton";
 import WatchListPage from "./pages/watchListPage";
+import TVPage from './pages/tvPage'
 
 const App = () => {
   return (
@@ -43,6 +44,8 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
+                    <Route path="/tvs/pages/:page" component={TVPage} />
+                    <Route path="/tvs" component={TVPage} />
                     <Route path="/" component={HomePage} />
                     <Redirect from="*" to="/" />
                   </Switch>
