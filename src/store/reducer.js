@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable'
-import { reducer as movieReducer } from '../components/store'
+import { reducer as movieReducer } from '../components/movieStore'
 
 const combinedReducer = combineReducers({
   movies: movieReducer

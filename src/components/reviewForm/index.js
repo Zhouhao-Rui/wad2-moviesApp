@@ -4,7 +4,7 @@ import useForm from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
 import {useDispatch} from 'react-redux'
-import { addFavorReviewAction, addWatchListReviewAction } from "../store/actionCreators";
+import { addFavorReviewAction, addWatchListReviewAction } from "../movieStore/actionCreators";
 
 const ReviewForm = ({ movie, index, type, history }) => {
   const { register, handleSubmit, errors, reset } = useForm();

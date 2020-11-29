@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction, changeWatchListAction } from '../components/store/actionCreators'
+import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction, changeWatchListAction } from '../components/movieStore/actionCreators'
 
 export const MoviesContext = React.createContext(null)
 
