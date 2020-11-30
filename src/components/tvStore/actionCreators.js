@@ -1,4 +1,4 @@
-import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS, CHANGE_TODAY_TVS_BY_SORT } from './constants'
+import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS } from './constants'
 import { getTodayTvs, getLatestTVs, getHotTVs } from '../../api/tmdb-api'
 
 const changeTodayTVsAction = (res) => ({
@@ -39,8 +39,3 @@ export const getHotTVsAction = () => {
     })
   }
 }
-
-export const changeTodayTVsBySortAvtion = (res) => ({
-  type: CHANGE_TODAY_TVS_BY_SORT,
-  tvs: res
-})

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router';
 import Pagination from '@material-ui/lab/Pagination';
 import { useDispatch, useSelector } from 'react-redux'
-import { getTodayTVsAction, changeTodayTVsBySortAvtion } from '../components/tvStore/actionCreators'
+import { getTodayTVsAction } from '../components/tvStore/actionCreators'
 import SearchHeader from '../components/tv/searchHeader'
 import SortButtonGroup from '../components/tv/sortButtonGroup'
 import CateButtonGroup from '../components/tv/cateButtonGroup'
