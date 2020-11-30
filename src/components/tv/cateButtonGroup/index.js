@@ -4,8 +4,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
-function CateButtonGroup({ buttonTitles, links }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+function CateButtonGroup({ buttonTitles, links, initial_index }) {
+  const [currentIndex, setCurrentIndex] = useState(initial_index)
 
   const handleClick = (index) => {
     console.log(index)

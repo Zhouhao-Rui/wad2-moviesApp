@@ -20,7 +20,9 @@ import { Provider } from 'react-redux'
 import store from "./store";
 import FloatingButton from "./components/floatingButton";
 import WatchListPage from "./pages/watchListPage";
-import TVPage from './pages/tvPage'
+import TodayTVPage from './pages/todayTVPage'
+import PopularTVPage from './pages/popularTVPage'
+import TopRatedTVPage from './pages/topRatedTVPage'
 
 const App = () => {
   return (
@@ -44,8 +46,12 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
-                    <Route path="/tvs/pages/:page" component={TVPage} />
-                    <Route path="/tvs" component={TVPage} />
+                    <Route path="/tvs/toprate/pages/:page" component={TopRatedTVPage} />
+                    <Route path="/tvs/toprate" component={TopRatedTVPage} /> 
+                    <Route path="/tvs/popular/pages/:page" component={PopularTVPage} />
+                    <Route path="/tvs/popular" component={PopularTVPage} /> 
+                    <Route path="/tvs/pages/:page" component={TodayTVPage} />
+                    <Route path="/tvs" component={TodayTVPage} />
                     <Route path="/" component={HomePage} />
                     <Redirect from="*" to="/" />
                   </Switch>

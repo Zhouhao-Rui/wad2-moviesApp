@@ -14,11 +14,11 @@ function SortButtonGroup({ buttonTitles, tvs, onSortChange }) {
         const aTime = new Date(a[title])
         const bTime = new Date(b[title])
 
-        return aTime.getTime() - bTime.getTime()
+        return bTime.getTime() - aTime.getTime()
       }))
     }
     onSortChange(copy_tvs.sort((a, b) => {
-      return a[title] - b[title]
+      return b[title] - a[title]
     }))
   }
   return (

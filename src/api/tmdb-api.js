@@ -66,3 +66,19 @@ export const getHotTVs = () => {
   .then(res => res.json())
   .then(json => json.results)
 }
+
+export const getPopularTVs = (page) => {
+  return fetch(
+    `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+  )
+  .then(res => res.json())
+  .then(json => json.results)
+}
+
+export const getTopRatedTVs = (page) => {
+  return fetch(
+    `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+  )
+  .then(res => res.json())
+  .then(json => json.results)
+}

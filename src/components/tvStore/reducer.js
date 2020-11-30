@@ -1,10 +1,12 @@
-import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS } from './constants'
+import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS, CHANGE_POPULAR_TVS, CHANGE_TOPRATED_TVS } from './constants'
 import { Map } from 'immutable'
 
 const initialState = Map({
   today_tvs: [],
   latest_tvs: [],
-  hot_tvs: []
+  hot_tvs: [],
+  popular_tvs: [],
+  toprated_tvs: []
 })
 
 const tvReducer = (state = initialState, action) => {
@@ -15,6 +17,10 @@ const tvReducer = (state = initialState, action) => {
       return state.set("latest_tvs", action.tvs)
     case CHANGE_HOT_TVS:
       return state.set("hot_tvs", action.tvs)
+    case CHANGE_POPULAR_TVS:
+      return state.set("popular_tvs", action.tvs)
+    case CHANGE_TOPRATED_TVS:
+      return state.set("toprated_tvs", action.tvs)
     default:
       return state
   }
