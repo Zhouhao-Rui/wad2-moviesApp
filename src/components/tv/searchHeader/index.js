@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getHotTVsAction } from '../../tvStore/actionCreators'
 import { Link } from 'react-router-dom'
 
-const SearchHeader = () => {
+const SearchHeader = ({ tvs, handleTextSearch }) => {
   const { hot_tvs } = useSelector(state => ({
     hot_tvs: state.getIn(["tvs", "hot_tvs"])
   }))
@@ -18,13 +18,18 @@ const SearchHeader = () => {
     dispatch(getHotTVsAction())
   }, [dispatch])
 
+  const handleChange = (e) => {
+    handleTextSearch(tvs.filter(tv => {
+      return tv.name.toLowerCase().search((e.target.value).toLowerCase()) !== -1
+    }))
+  }
   return (
-    <div className="col-sm-10 d-flex justify-content-start align-items-center flex-wrap search-container">
-      <TextField id="outlined-basic" label="Search Your movie" variant="outlined" className="bg-white search-input" size="small" />
+    <div className="col-sm-12 d-flex justify-content-start align-items-center flex-wrap search-container">
+      <TextField id="outlined-basic" label="Search Your movie" variant="outlined" className="bg-white search-input" size="small" onChange={(e) => handleChange(e)} />
       <Button className="text-white search-button" variant="contained" style={{ backgroundColor: "#3298dc" }} endIcon={<SearchIcon />}>search</Button>
       <div className="text-white">
         <span className="mr-2">hot air tvs:</span>
-        {hot_tvs && hot_tvs.sort((a, b) => { return (b.popularity - a.popularity) }).slice(0, 6).map(tv => (
+        {hot_tvs && hot_tvs.sort((a, b) => { return (b.popularity - a.popularity) }).slice(0, 8).map(tv => (
           <Link to={`/movies/${tv.id}`} className="text-white mr-3" key={tv.id}>
             <span>{tv.name}</span>
           </Link>
