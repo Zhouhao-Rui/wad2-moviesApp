@@ -1,30 +1,28 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
-import PaginationItem from '@material-ui/lab/PaginationItem';
-import { useDispatch, useSelector } from 'react-redux'
-import {getTodayTVsAction} from '../components/tvStore/actionCreators'
+import { useDispatch } from 'react-redux'
+import { getTodayTVsAction } from '../components/tvStore/actionCreators'
+import SearchHeader from '../components/tv/searchHeader'
 
 const TVPage = (props) => {
   const page = props.match.params.page
-  const { todayTVs } = useSelector(state => ({
-    todayTVs: state.getIn(["tvs", "today_tvs"])
-  }))
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    props.history.push(`/tvs/pages/${value}`)
+  };
   const dispatch = useDispatch()
   useEffect(() => {
+    setCurrentPage(Number(page))
     dispatch(getTodayTVsAction(page))
   }, [dispatch, page])
 
   return (
-    <Pagination count={10} defaultPage={1} color="primary"
-      renderItem={(item) => (
-        <PaginationItem
-          component={Link}
-          to={`/tvs/pages/${page}`}
-          {...item}
-        />
-      )} />
+    <>
+      <SearchHeader />
+      <Pagination count={10} defaultPage={1} page={currentPage} color="primary" onChange={handleChange} />
+    </>
   )
 }
 

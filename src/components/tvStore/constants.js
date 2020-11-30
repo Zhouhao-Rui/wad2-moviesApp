@@ -1,1 +1,5 @@
 export const CHANGE_TODAY_TVS = "CHANGE_TODAY_TVS"
+
+export const CHANGE_LATEST_TVS = "CHANGE_LATEST_TVS"
+
+export const CHANGE_HOT_TVS = "CHANGE_HOT_TVS"
