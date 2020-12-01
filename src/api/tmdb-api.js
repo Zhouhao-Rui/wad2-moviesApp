@@ -111,3 +111,16 @@ function postData(url, data) {
 export const postTVRating = (id, val) => {
   return postData(`https://api.themoviedb.org/3/tv/${id}/rating?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {"value": val})
 }
+
+export const getTVRating = () => {
+  return fetch(`https://api.themoviedb.org/3/account/${process.env.REACT_APP_TMDB_ACCOUNT_ID}/rated/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}&sort_by=created_at.asc`)
+  .then(res => res.json())
+  .then(json => json.results)
+}
+
+export const deleteTVRating = (id) => {
+  return fetch(`https://api.themoviedb.org/3/tv/${id}/rating?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {
+    method: 'DELETE'
+  })
+  .then(res => res.json())
+}

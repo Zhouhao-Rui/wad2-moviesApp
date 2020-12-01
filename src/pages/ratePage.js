@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { getTVDetails } from '../api/tmdb-api'
+import { getTVDetails, getTVRating, deleteTVRating } from '../api/tmdb-api'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -20,6 +20,7 @@ import Box from '@material-ui/core/Box';
  */
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { postTVRating } from '../api/tmdb-api'
 
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 function RatePage(props) {
   const id = props.match.params.id
   const [tv, setTV] = useState({})
+  const [ratedValue, setRatedValue] = useState(null)
   const [value, setValue] = React.useState(2);
   const [msg, setMsg] = React.useState("")
   const [msgType, setMsgType] = React.useState("")
@@ -60,6 +62,15 @@ function RatePage(props) {
       setTV(res)
     })
   }, [id])
+
+  useEffect(() => {
+    getTVRating().then(res => {
+      if (res.filter(rate => rate.id === tv.id).length !== 0) {
+        const rating = res.filter(rate => rate.id === tv.id)[0].rating
+        setRatedValue(rating)
+      }
+    })
+  }, [tv.id])
 
   const handleClick = (value) => {
     postTVRating(id, value).then(res => {
@@ -73,7 +84,20 @@ function RatePage(props) {
         setMsgType("error")
       }
     })
+  }
 
+  const handleDelete = () => {
+    deleteTVRating(tv.id).then(res => {
+      setMsg(res.status_message)
+      if (res.success) {
+        setMsgType("success")
+        setTimeout(() => {
+          props.history.go(0)
+        }, 2000)
+      } else {
+        setMsgType("error")
+      }
+    })
   }
   return (
     <div className="d-flex justify-content-center align-items-center flex-column">
@@ -99,12 +123,28 @@ function RatePage(props) {
           </Typography>
         </CardContent>
       </Card>
+      {ratedValue &&
+        <div className="d-flex flex-row mt-5 align-items-center">
+          <Typography className="font-weight-bold" component="span">Rated Value: {ratedValue}</Typography>
+          <Button
+            className="ml-3"
+            size="small"
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+            onClick={e => handleDelete()}
+          >
+            Delete
+          </Button>
+        </div>
+      }
 
-      <Box className="mt-3 text-center" component="fieldset" mb={3} borderColor="transparent">
+      <Box className="mt-5 text-center" component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">Rating</Typography>
         <Rating
           name="simple-controlled"
           value={value}
+          max={10}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
