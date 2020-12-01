@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   media: {
@@ -29,7 +30,7 @@ function TVCard({ tv }) {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}`: "./film-poster-placeholder.png"}
+            image={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : "./film-poster-placeholder.png"}
             title="Contemplative Reptile"
           />
           <CardContent>
@@ -53,8 +54,13 @@ function TVCard({ tv }) {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            Rate Now
-        </Button>
+            <Link to={{
+              pathname: `/tvs/rate/${tv.id}`,
+              state: {
+                tv
+              }
+            }}>Rate Now</Link>
+          </Button>
           <Button size="small" color="primary">
             Know More
         </Button>
