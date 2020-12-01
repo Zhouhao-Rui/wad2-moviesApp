@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { changeUpcomingCurrentPage, changeMovieCurrentPage, changeUpcomingPageNums, changeMoviePageNums } from '../store/actionCreators'
+import { changeUpcomingCurrentPage, changeMovieCurrentPage, changeUpcomingPageNums, changeMoviePageNums } from '../movieStore/actionCreators'
 
 function Pagination({ handleNavigation, type }) {
   const { upcomingPageNums, moviePageNums, currentUpcomingPage, currentMoviePage } = useSelector(state => ({

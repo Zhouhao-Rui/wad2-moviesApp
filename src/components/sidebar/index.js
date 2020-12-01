@@ -121,8 +121,8 @@ function SideBar() {
             <Input data-cy="searchInput" placeholder="search media..." onChange={e => setSearchItem(e.target.value)} />
           </ListItem>
           <ItemList icon={<MovieIcon />} primaryText="Movie" items={['All movie', 'Upcoming movie', 'Favorite Moive']} links={["/", "/movies/upcoming", "/movies/favorites"]} />
-          <ItemList icon={<LiveTvIcon />} primaryText="TV" items={["1", "2", "3"]} />
-          <ItemList icon={<VideoLibraryIcon />} primaryText="Collection" items={["1", "2", "3"]} />
+          <ItemList icon={<LiveTvIcon />} primaryText="TV" items={["Today Airing TV", "Top rated TV", "Popular TV"]} links={["/tvs", "/tvs/toprate", "tvs/popular"]} />
+          <ItemList icon={<VideoLibraryIcon />} primaryText="Collection" items={["List", "createList"]} links={["/list", "list/create"]} />
         </List>
         {isSearching && <h5>is Searching</h5>}
         <div className="mt-5">

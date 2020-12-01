@@ -1,0 +1,12 @@
+.search-container {
+  height: 100px;
+  background-color: #3272dc;
+}
+
+.search-input {
+  width: 90%
+}
+
+.search-button {
+  width: 10%
+}

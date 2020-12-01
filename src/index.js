@@ -20,6 +20,16 @@ import { Provider } from 'react-redux'
 import store from "./store";
 import FloatingButton from "./components/floatingButton";
 import WatchListPage from "./pages/watchListPage";
+import TodayTVPage from './pages/todayTVPage'
+import PopularTVPage from './pages/popularTVPage'
+import TopRatedTVPage from './pages/topRatedTVPage'
+import RatePage from './pages/ratePage'
+import DetailTVPage from './pages/detailTVPage'
+import SearchPage from './pages/searchPage'
+import PeoplePage from "./pages/peoplePage";
+import ListPage from './pages/listPage'
+import ListCreatePage from './pages/listCreatePage'
+import ListAddPage from './pages/listAddPage'
 
 const App = () => {
   return (
@@ -43,6 +53,20 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
+                    <PrivateRoute path="/list/create" component={ListCreatePage} />
+                    <PrivateRoute path="/list" component={ListPage} />
+                    <Route path="/people/:id" component={PeoplePage} />
+                    <Route path="/search/:value/pages/:page" component={SearchPage} />
+                    <Route path="/search/:value" component={SearchPage} />
+                    <Route path="/tv/:id" component={DetailTVPage} />
+                    <PrivateRoute path="/tvs/list/:id" component={ListAddPage} />
+                    <PrivateRoute path="/tvs/rate/:id" component={RatePage} />
+                    <Route path="/tvs/toprate/pages/:page" component={TopRatedTVPage} />
+                    <Route path="/tvs/toprate" component={TopRatedTVPage} /> 
+                    <Route path="/tvs/popular/pages/:page" component={PopularTVPage} />
+                    <Route path="/tvs/popular" component={PopularTVPage} /> 
+                    <Route path="/tvs/pages/:page" component={TodayTVPage} />
+                    <Route path="/tvs" component={TodayTVPage} />
                     <Route path="/" component={HomePage} />
                     <Redirect from="*" to="/" />
                   </Switch>
