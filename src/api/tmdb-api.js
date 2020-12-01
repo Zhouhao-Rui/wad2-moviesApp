@@ -151,3 +151,25 @@ export const getCreator = (id) => {
   .then(res => res.json())
   .then(json => json.person)
 }
+
+export const getLists = () => {
+  return fetch(`https://api.themoviedb.org/3/account/${process.env.REACT_APP_TMDB_ACCOUNT_ID}/lists?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}&page=1`)
+  .then(res => res.json())
+  .then(json => json.results)
+}
+
+export const createList = (data) => {
+  return postData(`https://api.themoviedb.org/3/list?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, data)
+}
+
+export const addMovieToList = (list_id, media_id) => {
+  return postData(`https://api.themoviedb.org/3/list/${list_id}/add_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {
+    media_id: media_id
+  })
+}
+
+export const getListDetail = (id) => {
+  return fetch(`https://api.themoviedb.org/3/list/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`)
+  .then(res => res.json())
+  .then(json => json.items)
+}

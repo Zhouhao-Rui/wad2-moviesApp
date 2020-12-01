@@ -64,7 +64,7 @@ function TVCard({ tv }) {
             }}>Rate Now</Link>
           </Button>
           <Button size="small" color="primary">
-            <Link to={`/tv/${tv.id}`}>Know More</Link>
+            <Link to={`/tvs/list/${tv.id}`}>Add to List</Link>
         </Button>
         </CardActions>
       </Card>

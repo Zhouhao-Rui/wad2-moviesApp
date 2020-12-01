@@ -27,6 +27,9 @@ import RatePage from './pages/ratePage'
 import DetailTVPage from './pages/detailTVPage'
 import SearchPage from './pages/searchPage'
 import PeoplePage from "./pages/peoplePage";
+import ListPage from './pages/listPage'
+import ListCreatePage from './pages/listCreatePage'
+import ListAddPage from './pages/listAddPage'
 
 const App = () => {
   return (
@@ -50,10 +53,13 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
+                    <PrivateRoute path="/list/create" component={ListCreatePage} />
+                    <PrivateRoute path="/list" component={ListPage} />
                     <Route path="/people/:id" component={PeoplePage} />
                     <Route path="/search/:value/pages/:page" component={SearchPage} />
                     <Route path="/search/:value" component={SearchPage} />
                     <Route path="/tv/:id" component={DetailTVPage} />
+                    <PrivateRoute path="/tvs/list/:id" component={ListAddPage} />
                     <PrivateRoute path="/tvs/rate/:id" component={RatePage} />
                     <Route path="/tvs/toprate/pages/:page" component={TopRatedTVPage} />
                     <Route path="/tvs/toprate" component={TopRatedTVPage} /> 
