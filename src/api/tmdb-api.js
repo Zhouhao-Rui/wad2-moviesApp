@@ -145,3 +145,9 @@ export const getTVReviews = (id) => {
   .then(res => res.json())
   .then(json => json.results)
 }
+
+export const getCreator = (id) => {
+  return fetch(`https://api.themoviedb.org/3/credit/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`)
+  .then(res => res.json())
+  .then(json => json.person)
+}

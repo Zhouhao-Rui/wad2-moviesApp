@@ -26,6 +26,7 @@ import TopRatedTVPage from './pages/topRatedTVPage'
 import RatePage from './pages/ratePage'
 import DetailTVPage from './pages/detailTVPage'
 import SearchPage from './pages/searchPage'
+import PeoplePage from "./pages/peoplePage";
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
+                    <Route path="/people/:id" component={PeoplePage} />
                     <Route path="/search/:value/pages/:page" component={SearchPage} />
                     <Route path="/search/:value" component={SearchPage} />
                     <Route path="/tv/:id" component={DetailTVPage} />

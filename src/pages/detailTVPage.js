@@ -32,7 +32,6 @@ function DetailTVPage(props) {
       setReviews(res)
     })
   }, [id])
-  console.log(similarTVs)
   return (
     <>
       <SearchHeader />
