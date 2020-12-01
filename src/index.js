@@ -24,6 +24,8 @@ import TodayTVPage from './pages/todayTVPage'
 import PopularTVPage from './pages/popularTVPage'
 import TopRatedTVPage from './pages/topRatedTVPage'
 import RatePage from './pages/ratePage'
+import DetailTVPage from './pages/detailTVPage'
+import SearchPage from './pages/searchPage'
 
 const App = () => {
   return (
@@ -47,6 +49,9 @@ const App = () => {
                     <PrivateRoute path="/movies/favorites" component={favoriteMoviesPage} />
                     <Route path="/movies/upcoming" component={UpcomingMoviesPage} />
                     <Route path="/movies/:id" component={MoviePage} />
+                    <Route path="/search/:value/pages/:page" component={SearchPage} />
+                    <Route path="/search/:value" component={SearchPage} />
+                    <Route path="/tv/:id" component={DetailTVPage} />
                     <PrivateRoute path="/tvs/rate/:id" component={RatePage} />
                     <Route path="/tvs/toprate/pages/:page" component={TopRatedTVPage} />
                     <Route path="/tvs/toprate" component={TopRatedTVPage} /> 

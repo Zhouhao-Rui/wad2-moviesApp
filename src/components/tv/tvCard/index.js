@@ -28,11 +28,13 @@ function TVCard({ tv }) {
     <div className="col-sm-3 mt-2">
       <Card>
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : "./film-poster-placeholder.png"}
-            title="Contemplative Reptile"
-          />
+          <Link to={`/tv/${tv.id}`}>
+            <CardMedia
+              className={classes.media}
+              image={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : "./film-poster-placeholder.png"}
+              title="Contemplative Reptile"
+            />
+          </Link>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {tv.name}
@@ -62,7 +64,7 @@ function TVCard({ tv }) {
             }}>Rate Now</Link>
           </Button>
           <Button size="small" color="primary">
-            Know More
+            <Link to={`/tv/${tv.id}`}>Know More</Link>
         </Button>
         </CardActions>
       </Card>

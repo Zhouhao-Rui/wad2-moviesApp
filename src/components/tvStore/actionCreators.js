@@ -1,5 +1,5 @@
-import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS, CHANGE_POPULAR_TVS, CHANGE_TOPRATED_TVS } from './constants'
-import { getTodayTvs, getLatestTVs, getHotTVs, getPopularTVs, getTopRatedTVs } from '../../api/tmdb-api'
+import { CHANGE_TODAY_TVS, CHANGE_LATEST_TVS, CHANGE_HOT_TVS, CHANGE_POPULAR_TVS, CHANGE_TOPRATED_TVS, CHANGE_SEARCH_TVS } from './constants'
+import { getTodayTvs, getLatestTVs, getHotTVs, getPopularTVs, getTopRatedTVs, searchTV } from '../../api/tmdb-api'
 
 const changeTodayTVsAction = (res) => ({
   type: CHANGE_TODAY_TVS,
@@ -65,4 +65,19 @@ export const getTopRatedTVsAction = (page) => {
     })
   }
 }
+
+const changeSearchTVsAction = (res) => ({
+  type: CHANGE_SEARCH_TVS,
+  tvs: res
+})
+
+export const getSearchTVsAction = (query, page) => {
+  return dispatch => {
+    searchTV(query, page).then(res => {
+      dispatch(changeSearchTVsAction(res))
+    })
+  }
+}
+
+
 
