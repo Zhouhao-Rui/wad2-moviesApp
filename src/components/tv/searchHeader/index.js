@@ -21,13 +21,14 @@ const SearchHeader = ({ tvs, handleTextSearch, history }) => {
 
   const handleChange = (e) => {
     setValue(e.target.value)
-    handleTextSearch(tvs.filter(tv => {
+    tvs && handleTextSearch(tvs.filter(tv => {
       return tv.name.toLowerCase().search((e.target.value).toLowerCase()) !== -1
     }))
   }
 
   const handleSearch = () => {
     history.push(`/search/${value}`)
+    console.log()
   }
   return (
     <div className="col-sm-12 d-flex justify-content-start align-items-center flex-wrap search-container">
