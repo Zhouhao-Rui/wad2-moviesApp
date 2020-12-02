@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ListAddPage(props) {
   const id = props.match.params.id
+  console.log(id)
   const [tv, setTV] = useState({})
   const [lists, setLists] = useState([])
   const [msg, setMsg] = React.useState("")
