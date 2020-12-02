@@ -45,7 +45,7 @@ function ListPage() {
           lists.length
             ? lists.map(list => (
               <List key={list.id}>
-                <ListItem button>
+                <ListItem data-cy="list-item" button>
                   <ListItemIcon>
                     <FolderIcon />
                   </ListItemIcon>

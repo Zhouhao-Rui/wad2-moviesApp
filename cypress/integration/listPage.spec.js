@@ -1,6 +1,12 @@
+let details = []
 describe('List Page Test', () => {
   before(() => {
     cy.visit('/')
+    cy.request(`https://api.themoviedb.org/3/account/${Cypress.env("TMDB_ACCOUNT_ID")}/lists?api_key=${Cypress.env("TMDB_KEY")}&language=en-US&session_id=${Cypress.env("TMDB_SESSION_ID")}&page=1`)
+    .its("body")
+    .then(res => {
+      details = res.results
+    })
   })
   describe('Create List Test', () => {
     before(() => {
@@ -28,6 +34,11 @@ describe('List Page Test', () => {
       cy.get('#description').type("This is the test list")
       cy.get("[data-cy=create-button]").click()
       cy.url().should('contain', '/list')
+    })
+  })
+  describe('List Page', () => {
+    it("should display the medias' names in the list", () => {
+      cy.get("[data-cy=list-item]").should("have.length", details.length)
     })
   })
   
