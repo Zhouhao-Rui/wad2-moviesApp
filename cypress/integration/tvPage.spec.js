@@ -152,4 +152,29 @@ describe('TVPage test', () => {
     })
   })
 
+  describe('Search functionality test', () => {
+    it('should filter the tv shows when typed word is found in the page', () => {
+      const tvs = todayTVs.filter(tv => {
+        return tv.name.toLowerCase().search(("The").toLowerCase()) !== -1
+      })
+      cy.get('[data-cy=search-field]').type('The')
+      cy.get('[data-cy=card-content]').should('have.length', tvs.length)
+    })
+
+    it('should show no tv shows when typed word is not found in the page', () => {
+      cy.get('[data-cy=search-field]').type('AAAAA')
+      cy.get('[data-cy=card-content]').should('not.exist')
+    })
+
+    it('should jump to the search page to display the page with typed word when click the search button', () => {
+      cy.get('[data-cy=search-field]').type('The')
+      cy.get('.search-button').click({ force: true })
+      cy.wait(500)
+      cy.url().should("contain", "search/The")
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).contains('The', { matchCase: false })
+      })
+    })
+  })
+
 })
