@@ -118,4 +118,38 @@ describe('TVPage test', () => {
     })
   })
 
+  describe('Pagination test', () => {
+    it('should show the specific page data when clicking the specific pagination button', () => {
+      cy.get('.MuiPagination-ul').find("li").eq(2).find('button').click({ force: true })
+      cy.wait(500)
+      cy.url().should('contain', 'pages/2')
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', todayTVsPageTwo[index].name)
+      })
+    })
+
+    it('should show the next page data when clicking the forward pagination button', () => {
+      cy.get('.MuiPagination-ul').find("li").eq(1).find('button').click({ force: true })
+      cy.get('.MuiPagination-ul').find("li:last-child").find('button').click({ force: true })
+      cy.wait(500)
+      cy.url().should('contain', 'pages/2')
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', todayTVsPageTwo[index].name)
+      })
+    })
+
+    it('should show the previous page data when clicking the backward pagination button', () => {
+      cy.get('.MuiPagination-ul').find("li").eq(2).find('button').click({ force: true })
+      cy.get('.MuiPagination-ul').find("li:first-child").find('button').click({ force: true })
+      cy.wait(500)
+      cy.url().should('contain', 'pages/1')
+      todayTVs.sort((a, b) => {
+        return b.popularity - a.popularity
+      })
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', todayTVs[index].name)
+      })
+    })
+  })
+
 })
