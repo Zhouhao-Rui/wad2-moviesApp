@@ -19,6 +19,13 @@ import ReviewForm from '../src/components/reviewForm'
 import SigninPage from "../src/pages/signinPage";
 import SignupPage from "../src/pages/signupPage";
 import Profile from "../src/components/profile";
+import SideBar from '../src/components/sidebar'
+import FloatingButton from '../src/components/floatingButton'
+import { Provider } from 'react-redux'
+import store from '../src/store'
+import TVCard from "../src/components/tv/tvCard";
+import ListPage from "../src/pages/listPage";
+import ListCreatePage from "../src/pages/listCreatePage";
 
 const sample = {
   adult: false,
@@ -100,6 +107,261 @@ const sample = {
   vote_average: 7,
   vote_count: 9692
 };
+
+const sampleTV = {
+  "backdrop_path": "/9abMIArcm95q0CtTOTZnLdUIoSm.jpg",
+  "created_by": [
+    {
+      "id": 1220819,
+      "credit_id": "5254146119c29579403662a1",
+      "name": "William J. Bell",
+      "gender": 0,
+      "profile_path": null
+    },
+    {
+      "id": 1689203,
+      "credit_id": "598754ebc3a368375f011cc4",
+      "name": "Lee Phillip Bell",
+      "gender": 1,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [
+    30
+  ],
+  "first_air_date": "1973-08-10",
+  "genres": [
+    {
+      "id": 10766,
+      "name": "Soap"
+    }
+  ],
+  "homepage": "http://www.cbs.com/shows/the_young_and_the_restless/",
+  "id": 1054,
+  "in_production": true,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2020-12-01",
+  "last_episode_to_air": {
+    "air_date": "2020-12-01",
+    "episode_number": 50,
+    "id": 2512769,
+    "name": "Episode 12000 - December 1, 2020",
+    "overview": "The first families of Genoa City come together to celebrate the wedding of Phillip “Chance” Chancellor and Abby Newman.",
+    "production_code": "",
+    "season_number": 48,
+    "still_path": null,
+    "vote_average": 0,
+    "vote_count": 0
+  },
+  "name": "The Young and the Restless",
+  "next_episode_to_air": {
+    "air_date": "2020-12-02",
+    "episode_number": 51,
+    "id": 2538553,
+    "name": "Episode 12001 - December 2, 2020",
+    "overview": "Things are looking bad for Billy as evidence mounts that he might have been the one who picked up a gun and aimed it at Adam. Jack takes a moment to make a promise regarding the future.",
+    "production_code": "",
+    "season_number": 48,
+    "still_path": null,
+    "vote_average": 0,
+    "vote_count": 0
+  },
+  "networks": [
+    {
+      "name": "CBS",
+      "id": 16,
+      "logo_path": "/nm8d7P7MJNiBLdgIzUK0gkuEA4r.png",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 1508,
+  "number_of_seasons": 13,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "The Young and the Restless",
+  "overview": "The rivalries, romances, hopes and fears of the residents of the fictional Midwestern metropolis, Genoa City. The lives and loves of a wide variety of characters mingle through the generations, dominated by the Newman, Abbott, Baldwin and Winters families.",
+  "popularity": 21.278,
+  "poster_path": "/zFWXXEueFNEu3ddV4RxEtghKib.jpg",
+  "production_companies": [
+    {
+      "id": 1081,
+      "logo_path": "/vfcpaPf6WktaCIHqF4FJAcek8q2.png",
+      "name": "CBS Television Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 142334,
+      "logo_path": null,
+      "name": "Screen Gems",
+      "origin_country": ""
+    },
+    {
+      "id": 3614,
+      "logo_path": "/qFRpYYtU9iyVKDMpm3a8tN7Q7YE.png",
+      "name": "Columbia Pictures Television",
+      "origin_country": "US"
+    },
+    {
+      "id": 26102,
+      "logo_path": null,
+      "name": "CPT Holdings Inc.",
+      "origin_country": ""
+    },
+    {
+      "id": 10471,
+      "logo_path": "/tHIwIKoXdLKA8Nt3XeRInh71OvD.png",
+      "name": "Columbia TriStar Television",
+      "origin_country": "US"
+    },
+    {
+      "id": 11073,
+      "logo_path": "/wHs44fktdoj6c378ZbSWfzKsM2Z.png",
+      "name": "Sony Pictures Television",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "1973-08-10",
+      "episode_count": 1,
+      "id": 79182,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 1
+    },
+    {
+      "air_date": null,
+      "episode_count": 0,
+      "id": 79183,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 2
+    },
+    {
+      "air_date": null,
+      "episode_count": 1,
+      "id": 121679,
+      "name": "14",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 14
+    },
+    {
+      "air_date": null,
+      "episode_count": 2,
+      "id": 78295,
+      "name": "Season 35",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 35
+    },
+    {
+      "air_date": null,
+      "episode_count": 2,
+      "id": 86308,
+      "name": "Season 40",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 40
+    },
+    {
+      "air_date": "2013-03-25",
+      "episode_count": 368,
+      "id": 91146,
+      "name": "Season 41",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 41
+    },
+    {
+      "air_date": null,
+      "episode_count": 10,
+      "id": 67641,
+      "name": "Season 42",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 42
+    },
+    {
+      "air_date": "2015-09-01",
+      "episode_count": 119,
+      "id": 70240,
+      "name": "Season 43",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 43
+    },
+    {
+      "air_date": "2016-09-01",
+      "episode_count": 255,
+      "id": 79767,
+      "name": "Season 44",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 44
+    },
+    {
+      "air_date": "2017-09-01",
+      "episode_count": 255,
+      "id": 92089,
+      "name": "Season 45",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 45
+    },
+    {
+      "air_date": "2018-09-03",
+      "episode_count": 255,
+      "id": 111057,
+      "name": "Season 46",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 46
+    },
+    {
+      "air_date": "2019-09-03",
+      "episode_count": 187,
+      "id": 131649,
+      "name": "Season 47",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 47
+    },
+    {
+      "air_date": "2020-09-21",
+      "episode_count": 53,
+      "id": 163935,
+      "name": "Season 48",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 48
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 6,
+  "vote_count": 74
+}
 
 const review = {
   author: "Weedinator",
@@ -237,5 +499,61 @@ storiesOf("Auth Page/Profile", module)
   .add("default", () => {
     return (
       <Profile />
+    )
+  })
+
+storiesOf("Sidebar", module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <SideBar />
+    )
+  })
+
+storiesOf("Floating Button", module)
+  .addDecorator(story => (
+    <Provider store={store}>{story()}</Provider>
+  ))
+  .add("default", () => {
+    return (
+      <FloatingButton />
+    )
+  })
+
+storiesOf("TV card", module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <TVCard tv={sampleTV} />
+    )
+  })
+
+storiesOf('List Page/List Page', module)
+  .addDecorator(story => (
+    <Provider store={store}>{story()}</Provider>
+  ))
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <ListPage />
+    )
+  })
+
+storiesOf('List Page/Create List', module)
+  .addDecorator(story => (
+    <Provider store={store}>{story()}</Provider>
+  ))
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <ListCreatePage />
     )
   })
