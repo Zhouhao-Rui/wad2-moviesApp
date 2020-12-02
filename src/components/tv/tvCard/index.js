@@ -28,7 +28,7 @@ function TVCard({ tv }) {
     <div className="col-sm-3 mt-2">
       <Card>
         <CardActionArea>
-          <Link to={`/tv/${tv.id}`}>
+          <Link to={`/tv/${tv.id}`} data-cy="detail-link">
             <CardMedia
               className={classes.media}
               image={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : "./film-poster-placeholder.png"}

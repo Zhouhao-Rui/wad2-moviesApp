@@ -63,7 +63,7 @@ function DetailTVPage(props) {
                 </Typography>
                 <Typography className="mt-2">
                   Created By: {tv.created_by.map(people => (
-                  <Link key={people.id} className="ml-2" to={`/people/${people.credit_id}`}>{people.name}</Link>
+                  <Link data-cy="people-link" key={people.id} className="ml-2" to={`/people/${people.credit_id}`}>{people.name}</Link>
                 ))}
                 </Typography>
                 <Typography className="mt-5">
@@ -99,7 +99,7 @@ function DetailTVPage(props) {
             <tbody>
               {reviews.map(review => {
                 return (
-                  <tr key={review.id}>
+                  <tr key={review.id} data-cy="review-attr">
                     <td>{review.author}</td>
                     <td>{excerpt(review.content)}</td>
                     <td>
