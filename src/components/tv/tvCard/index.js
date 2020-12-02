@@ -55,7 +55,7 @@ function TVCard({ tv }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" data-cy="rate-button">
             <Link to={{
               pathname: `/tvs/rate/${tv.id}`,
               state: {
@@ -63,7 +63,7 @@ function TVCard({ tv }) {
               }
             }}>Rate Now</Link>
           </Button>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" data-cy="list-button">
             <Link to={`/tvs/list/${tv.id}`}>Add to List</Link>
         </Button>
         </CardActions>

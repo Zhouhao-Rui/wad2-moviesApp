@@ -177,4 +177,27 @@ describe('TVPage test', () => {
     })
   })
 
+  describe('Rate functionality test', () => {
+    it.only('should rate for the film and show the success message', () => {
+      cy.get('[data-cy=rate-button]').eq(0).find("span").find("a").click({ force: true })
+      cy.wait(500)
+      cy.get('#simple-controlled-10').trigger('mouseover', { force: true })
+      cy.get('[data-cy=send-button]').click()
+      cy.wait(500)
+      cy.get('[data-cy=msg]').should('be.visible')
+      cy.wait(3000)
+      cy.url().should("match", /tvs/)
+    })
+
+    it.only('should delete rate if the tv show is rated', () => {
+      cy.get('[data-cy=rate-button]').eq(0).find("span").find("a").click({ force: true })
+      cy.wait(500)
+      cy.get('[data-cy=delete-button]').click()
+      cy.get('[data-cy=msg]').should('be.visible')
+      cy.wait(3000)
+      cy.get('[data-cy=delete-button]').should('not.exist')
+    })
+  })
+
+
 })

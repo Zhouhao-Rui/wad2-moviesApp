@@ -127,6 +127,7 @@ function RatePage(props) {
         <div className="d-flex flex-row mt-5 align-items-center">
           <Typography className="font-weight-bold" component="span">Rated Value: {ratedValue}</Typography>
           <Button
+            data-cy="delete-button"
             className="ml-3"
             size="small"
             variant="contained"
@@ -152,6 +153,7 @@ function RatePage(props) {
       </Box>
 
       <Button
+        data-cy="send-button"
         variant="contained"
         color="primary"
         className={classes.button}
@@ -161,7 +163,7 @@ function RatePage(props) {
         Send
       </Button>
 
-      {msg && <Alert className="mt-5" severity={msgType}>{msg}</Alert>}
+      {msg && <Alert data-cy="msg" className="mt-5" severity={msgType}>{msg}</Alert>}
     </div>
   )
 }
