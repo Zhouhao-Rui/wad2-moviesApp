@@ -55,7 +55,7 @@ function PeoplePage(props) {
               <div className="d-flex flex-row justify-content-between align-items-center">
                 {creator.known_for.map(media => (
                   <div>
-                    <Link to={`/tv/${media.id}`}><img src={`https://image.tmdb.org/t/p/w300/${media.poster_path}`} alt="" style={{ width: 150 }} /></Link>
+                    <Link to={`/tv/${media.id}`}><img data-cy="people-poster" src={`https://image.tmdb.org/t/p/w300/${media.poster_path}`} alt="" style={{ width: 150 }} /></Link>
                     <p>{media.name}</p>
                   </div>
                 ))}
