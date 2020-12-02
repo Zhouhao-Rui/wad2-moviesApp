@@ -35,21 +35,21 @@ function TVCard({ tv }) {
               title="Contemplative Reptile"
             />
           </Link>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+          <CardContent data-cy="card-content">
+            <Typography gutterBottom variant="h5" component="h2" data-cy="tv-name">
               {tv.name}
             </Typography>
             <Typography className={classes.overview} variant="body2" color="textSecondary" component="p">
               {tv.overview}
             </Typography>
             <Divider />
-            <Typography variant="body2" color="textPrimary" component="p">
+            <Typography variant="body2" color="textPrimary" component="p" data-cy="first-air-date">
               date: {tv.first_air_date}
             </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
+            <Typography variant="body2" color="textPrimary" component="p" data-cy="vote-average">
               rate: {tv.vote_average}
             </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
+            <Typography variant="body2" color="textPrimary" component="p" data-cy="vote-count">
               vote count: {tv.vote_count}
             </Typography>
           </CardContent>

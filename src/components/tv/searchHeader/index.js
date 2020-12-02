@@ -32,13 +32,13 @@ const SearchHeader = ({ tvs, handleTextSearch, history }) => {
   }
   return (
     <div className="col-sm-12 d-flex justify-content-start align-items-center flex-wrap search-container">
-      <TextField id="outlined-basic" label="Search Your movie" variant="outlined" className="bg-white search-input" size="small" onChange={(e) => handleChange(e)} />
+      <TextField id="outlined-basic" label="Search Your movie" variant="outlined" className="bg-white search-input" size="small" onChange={(e) => handleChange(e)} data-cy="search-field" />
       <Button className="text-white search-button" variant="contained" style={{ backgroundColor: "#3298dc" }} endIcon={<SearchIcon />}
         onClick={e => handleSearch()}>search</Button>
       <div className="text-white">
         <span className="mr-2">hot air tvs:</span>
         {hot_tvs && hot_tvs.sort((a, b) => { return (b.popularity - a.popularity) }).slice(0, 8).map(tv => (
-          <Link to={`/movies/${tv.id}`} className="text-white mr-3" key={tv.id}>
+          <Link to={`/movies/${tv.id}`} className="text-white mr-3" key={tv.id} data-cy="hot-link">
             <span>{tv.name}</span>
           </Link>
         ))}

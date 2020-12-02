@@ -26,9 +26,9 @@ function SortButtonGroup({ buttonTitles, tvs, onSortChange }) {
       <ButtonGroup aria-label="outlined primary button group">
         {buttonTitles.map((buttonTitle, index) => (
           currentIndex === index ?
-            <Button style={{ backgroundColor: '#3298dc' }} className="text-white" size="small" key={index}>{buttonTitle}</Button>
+            <Button data-cy="sort-button" style={{ backgroundColor: '#3298dc' }} className="text-white" size="small" key={index}>{buttonTitle}</Button>
             :
-            <Button className="bg-white" size="small" key={index} onClick={() => handleClick(buttonTitle, index)}>{buttonTitle}</Button>
+            <Button data-cy="sort-button" className="bg-white" size="small" key={index} onClick={() => handleClick(buttonTitle, index)}>{buttonTitle}</Button>
         ))}
       </ButtonGroup>
     </div>
