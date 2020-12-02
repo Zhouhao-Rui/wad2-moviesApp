@@ -77,7 +77,7 @@ function ListCreatePage({ history }) {
                   </div>
                   <p className="text-danger">{errors.description}</p>
                   <div className="text-center">
-                    <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+                    <button data-cy="create-button" className="btn btn-primary" type="submit" disabled={isSubmitting}>
                       Create
                   </button>
                   </div>
