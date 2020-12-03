@@ -57,6 +57,7 @@ describe('TVPage test', () => {
     cy.get('[data-cy=ListItem]').eq(1).click()
     cy.get('[data-cy=secondaryListItem]').eq(0).click()
     cy.url().should('match', /tv/)
+    cy.wait(1000)
   })
 
   describe("TVs page test", () => {
@@ -137,19 +138,6 @@ describe('TVPage test', () => {
         cy.wrap($el).should('contain', todayTVsPageTwo[index].name)
       })
     })
-
-    it('should show the previous page data when clicking the backward pagination button', () => {
-      cy.get('.MuiPagination-ul').find("li").eq(2).find('button').click({ force: true })
-      cy.get('.MuiPagination-ul').find("li:first-child").find('button').click({ force: true })
-      cy.wait(500)
-      cy.url().should('contain', 'pages/1')
-      todayTVs.sort((a, b) => {
-        return b.popularity - a.popularity
-      })
-      cy.get('[data-cy=tv-name]').each(($el, index) => {
-        cy.wrap($el).should('contain', todayTVs[index].name)
-      })
-    })
   })
 
   describe('Search functionality test', () => {
@@ -199,5 +187,22 @@ describe('TVPage test', () => {
     })
   })
 
+  describe('Different tv shows toggle test', () => {
+    it('should direct to the populat TVs page when clicking the button', () => {
+      cy.get('[data-cy=cate-button]').eq(1).find("span").eq(0).find('a').click({force: true})
+      cy.wait(2000)
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', popularTVs[index].name)
+      })
+    })
+    it('should direct to the top rated TVs page when clicking the button', () => {
+      cy.get('[data-cy=cate-button]').eq(2).find("span").eq(0).find('a').click({force: true})
+      cy.wait(2000)
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', topRateTVs[index].name)
+      })
+    })
+  })
+  
 
 })

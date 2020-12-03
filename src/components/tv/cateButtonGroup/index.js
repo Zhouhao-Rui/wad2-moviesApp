@@ -16,9 +16,9 @@ function CateButtonGroup({ buttonTitles, links, initial_index }) {
       <ButtonGroup variant="text" aria-label="text primary button group">
         {buttonTitles.map((buttonTitle, index) => (
           currentIndex === index ?
-            <Button style={{ backgroundColor: '#3273dc' }} size="small" key={index}><Link className="text-white" to={links[index]}>{buttonTitle}</Link></Button>
+            <Button data-cy="cate-button" style={{ backgroundColor: '#3273dc' }} size="small" key={index}><Link className="text-white" to={links[index]}>{buttonTitle}</Link></Button>
             :
-            <Button className="bg-white" size="medium" key={index} onClick={() => handleClick(index)}><Link className="text-dark" to={links[index]}>{buttonTitle}</Link></Button>
+            <Button data-cy="cate-button" className="bg-white" size="medium" key={index} onClick={() => handleClick(index)}><Link className="text-dark" to={links[index]}>{buttonTitle}</Link></Button>
         ))}
       </ButtonGroup>
       <Divider />
