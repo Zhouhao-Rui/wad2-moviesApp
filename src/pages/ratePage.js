@@ -92,7 +92,7 @@ function RatePage(props) {
       if (res.success) {
         setMsgType("success")
         setTimeout(() => {
-          props.history.go(0)
+          props.history.go(-1)
         }, 2000)
       } else {
         setMsgType("error")
