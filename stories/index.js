@@ -434,6 +434,9 @@ storiesOf("Movie Reviews Page/MovieReviews", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
+  .addDecorator(story => (
+    <Provider store={store}>{story()}</Provider>
+  ))
   .add('default', () => {
     return (
       <MovieReviews movie={sample} />
@@ -450,6 +453,9 @@ storiesOf("Movie Reviews Page/MovieReview", module)
 storiesOf("Movie Reviews Page/ReviewForm", module)
   .addDecorator(story => (
     <MovieCotextProvider>{story()}</MovieCotextProvider>
+  ))
+  .addDecorator(story => (
+    <Provider store={store}>{story()}</Provider>
   ))
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
@@ -491,7 +497,7 @@ storiesOf("Auth Page/Profile", module)
     <AuthProvider>{story()}</AuthProvider>
   ))
   .addDecorator(story => (
-    <MovieCotextProvider>{story()}</MovieCotextProvider>
+    <Provider store={store}>{story()}</Provider>
   ))
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
