@@ -38,7 +38,7 @@
     "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
     "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
     "cypress:run:local": "npm run cypress:start:wait -- \"cypress run\"&& npx nyc report --check-coverage --lines 80",
-    "start:ci": "start-server-and-test 'http-server ./build  -p 3000' 3000 'cypress run --browser chrome'"
+    "start:ci": "start-server-and-test 'http-server ./build  -p 3000' 3000 'cypress run --browser chrome --record'"
   },
   "eslintConfig": {
     "extends": "react-app"

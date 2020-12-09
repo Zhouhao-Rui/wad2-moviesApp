@@ -179,7 +179,7 @@ describe('TVPage test', () => {
 
     it('should delete rate if the tv show is rated', () => {
       cy.get('[data-cy=rate-button]').eq(0).find("span").find("a").click({ force: true })
-      cy.wait(500)
+      cy.wait(2000)
       cy.get('[data-cy=delete-button]').click()
       cy.get('[data-cy=msg]').should('be.visible')
       cy.wait(3000)
