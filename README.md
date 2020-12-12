@@ -4,8 +4,6 @@ Name: Zhouhao Rui
 
 ## Features.
 
-...... A bullet-point list of the ADDITIONAL user features you have implemented for the  Movies Fan app ......,
-
  + Feature 1 - Sign in / sign up and authentication: To realize some router forbidden to the visitors, like the add Favorite, add to Watch List Functionality.
  + Feature 2 - Pagination for the movie List and upcoming movie List: User can click the page to see the specific page's movies, and the page number will keep alive after leaving the movie page.
  + Feature 3 - Review for the movies: User can add their reviews for the movies, and the reviews will show after the reviews from the website. 
@@ -30,13 +28,9 @@ Name: Zhouhao Rui
 
 ## Setup requirements (If required).
 
-...... A brief explanation of any non-standard setup steps necessary to run your app/client locally (after cloning the repo) ........
-
 It needs all the parameters of firebase and TMDB to start the service, and all of these parameters are defined in the .env file. However, it has been add to the .gitignore for the thought of security.
 
 ## API Data Model.
-
-..... List the additional TMDB endpoints used in your assignment, e.g.
 
 + GET: https://api.themoviedb.org/3/movie/${id} - get detailed information on a specific movie. 
 + GET: https://api.themoviedb.org/3/search/movie?&language=en-us&query=${string}&page=1 - get the medias according to the query strings.
@@ -64,13 +58,9 @@ It needs all the parameters of firebase and TMDB to start the service, and all o
 
 ### Component catalogue (If required).
 
-....... Insert a screenshot from the Storybook UI, hi-light stories relating to new/modified components you developed - see example screenshot below] .......
-
-![][new_story.png)
+![][new_story]
 
 ### UI Design.
-
-...... Insert screenshots of the new/modified views you have added to the Movies Fan app. Include a caption for each one clearly stating its purpose and any user interaction it supports ........
 
 ![][movie_pagination]
 >Provide the pagination functionality for the users.  When the user click the previous/next, it can load the previous/next page movie data. When the user click the specific page number, it can load the corresponding page's movie data. And after the user coming back from other route, the page number will still alive.(e.g. still remain 2 in the above picture)
@@ -209,8 +199,6 @@ It needs all the parameters of firebase and TMDB to start the service, and all o
 
 ## Routing.
 
-...... Insert a list of the additional routes supported by your Movies Fan app. If relevant, specify which of the routes require authentication, i.e. protected/private.
-
 + /movies/favorites (private) - displays the user's favorite movies selection.
 
 + /movies/watchLists(private) - displays the user's watch list's movies.
@@ -252,8 +240,6 @@ It needs all the parameters of firebase and TMDB to start the service, and all o
   
 
 ### Data hyperlinking.
-
-.... Use screenshots to illustrate where data hyperlinking is present in your views - include captions.
 
 ![][movie_card]
 > Clicking a card causes the display of that movie's details.
@@ -350,8 +336,6 @@ It needs all the parameters of firebase and TMDB to start the service, and all o
 
 
 ## Independent learning (If relevant).
-
-. . . . . Briefly mention each technologies/techniques used in your project codebase that were not covered in the lectures/labs. Provide source code filename references to support your assertions and include reference material links (articles/blogs).
 
 1. react-transition-group
 
@@ -550,9 +534,6 @@ Name: Zhouhao Rui
 
 ## App Features.
 
-[Document each new feature/page in your Movies Fan app, including: Feature Name; Its objective/purpose; The associated test file; a screenshot of its UI.]
-e,g,
-
 + Sign up page: Support user to sign up in the application by firebase. 
 
 Tests: cypress/integration/auth.spec.js
@@ -627,7 +608,6 @@ https://gitlab.com/ZhouhaoRui/moviesapp-ci
 
 ### Advanced Testing (If required).
 
-[State briefly each instances of boundary and/or error/exceptional test case in your project]
 e.g.
 
 + cypress/integration/movieDetails.spec.js - test when a movie has no reviews.
@@ -643,10 +623,6 @@ e.g.
 + cypress/integration/listPage.spec.js - test when the description is empty.
 
 ## Independent learning (If relevant).
-
-[ Itemize each technologies/techniques used in your project that were not covered in the lectures/labs. Provide the necessary evidence of their use (e,g, project file names, screenshots, service URL, etc)
-
-List reference material links (articles/blogs).
 
 1. code coverage:
 

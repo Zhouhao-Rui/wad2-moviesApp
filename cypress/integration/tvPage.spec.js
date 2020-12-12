@@ -70,16 +70,16 @@ describe('TVPage test', () => {
       })
     })
 
-    // it('should show the tvs sorted by Vote count', () => {
-    //   todayTVs.sort((a, b) => {
-    //     return b.vote_count - a.vote_count
-    //   })
-    //   cy.get('[data-cy=sort-button]').eq(1).click({ force: true })
-    //   cy.wait(3000)
-    //   cy.get('[data-cy=card-content]').each(($el, index) => {
-    //     cy.wrap($el).find('[data-cy=vote-count]').should('contain', "" + todayTVs[index].vote_count)
-    //   })
-    // })
+    it('should show the tvs sorted by Vote count', () => {
+      todayTVs.sort((a, b) => {
+        return b.vote_count - a.vote_count
+      })
+      cy.get('[data-cy=sort-button]').eq(1).click({ force: true })
+      cy.wait(3000)
+      cy.get('[data-cy=card-content]').each(($el, index) => {
+        cy.wrap($el).find('[data-cy=vote-count]').should('contain', "" + todayTVs[index].vote_count)
+      })
+    })
 
     it('should show the tvs sorted by Vote average', () => {
       todayTVs.sort((a, b) => {
@@ -106,17 +106,17 @@ describe('TVPage test', () => {
       })
     })
 
-    // it('should show the tvs sorted by popularity', () => {
-    //   todayTVs.sort((a, b) => {
-    //     return b.popularity - a.popularity
-    //   })
-    //   cy.get('[data-cy=sort-button]').eq(1).click({ force: true })
-    //   cy.get('[data-cy=sort-button]').eq(0).click({ force: true })
-    //   cy.wait(3000)
-    //   cy.get('[data-cy=tv-name]').each(($el, index) => {
-    //     cy.wrap($el).should('contain', todayTVs[index].name)
-    //   })
-    // })
+    it('should show the tvs sorted by popularity', () => {
+      todayTVs.sort((a, b) => {
+        return b.popularity - a.popularity
+      })
+      cy.get('[data-cy=sort-button]').eq(1).click({ force: true })
+      cy.get('[data-cy=sort-button]').eq(0).click({ force: true })
+      cy.wait(3000)
+      cy.get('[data-cy=tv-name]').each(($el, index) => {
+        cy.wrap($el).should('contain', todayTVs[index].name)
+      })
+    })
   })
 
   describe('Pagination test', () => {
