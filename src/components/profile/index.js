@@ -3,7 +3,6 @@ import "../../globals/fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAuth } from '../../contexts/authContext'
 import { useSelector, shallowEqual } from 'react-redux'
 import Carousel from '../carousel'
 
@@ -12,7 +11,6 @@ function Profile() {
   const { favorites } = useSelector(state => ({
     favorites: state.getIn(["movies", "favorites"])
   }), shallowEqual)
-  const { currentUser } = useAuth()
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>
@@ -26,7 +24,7 @@ function Profile() {
             />
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center">
-            <p className="font-weight-bold ml-2">Email: {currentUser.email}</p>
+            <p className="font-weight-bold ml-2">UserName: {window.localStorage.getItem("username")}</p>
             <p className="font-weight-bold ml-2 mt-4">Favorite Movies</p>
             <ol>
               {favorites.map(movie => {

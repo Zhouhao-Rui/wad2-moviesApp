@@ -4,11 +4,9 @@ import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 
-import { useAuth } from '../../contexts/authContext'
 import SideBar from "../sidebar";
 
 const SiteHeader = ({ history }) => {
-  const { signout, currentUser } = useAuth()
 
   return (
     <nav className="navbar fixed-top navbar-light bg-dark">
@@ -49,7 +47,7 @@ const SiteHeader = ({ history }) => {
             if user is not authorized, it will show the signin Link
           */}
           {
-            !currentUser &&
+            !window.localStorage.getItem("username") &&
             <>
               <li>
                 <Link data-cy="signin" className="nav-link text-white" to="/signin">
@@ -61,7 +59,7 @@ const SiteHeader = ({ history }) => {
           {/* 
             if user is authorized, it will show the logout and profile link
           */}
-          {currentUser &&
+          {window.localStorage.getItem("username") &&
           <>
             <li>
               <Link data-cy="profile" className="nav-link text-white" to="/profile">
@@ -69,7 +67,7 @@ const SiteHeader = ({ history }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <p data-cy="logout" className="nav-link text-white" onClick={() => {signout(); history.go(0)}} style={{ cursor: "pointer" }}>
+              <p data-cy="logout" className="nav-link text-white" onClick={() => {window.localStorage.removeItem("username"); history.go(0)}} style={{ cursor: "pointer" }}>
                 logOut
             </p>
               </li>

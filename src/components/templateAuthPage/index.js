@@ -7,28 +7,32 @@ function AuthTemplate(props) {
   const [errorMsg, setErrorMsg] = useState("")
   const validate = values => {
     const errors = {}
-    if (!values.email) {
-      errors.email = "email is required"
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
+    if (!values.username) {
+      errors.username = "username is required"
     }
 
     if (!values.password) {
       errors.password = "password is required"
-    } else if (values.password.length < 6) {
-      errors.password = "Must be 6 chars or more"
+    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,300}$/.test(values.password)) {
+      errors.password = "password invalid"
     }
     return errors
   }
   return (
     <div>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ username: '', password: '' }}
         validate={validate}
         onSubmit={async values => {
           try {
-            await authMethod(values.email, values.password)
-            history.push(successRoutePath)
+            const res = await authMethod(values)
+            if (res.code === 401) {
+              setErrorMsg(res.msg)
+            }else {
+              window.localStorage.setItem("username", res.username)
+              window.localStorage.setItem("token", res.token)
+              history.push(successRoutePath)
+            }
           } catch (e) {
             setErrorMsg(e.message)
           }
@@ -51,15 +55,15 @@ function AuthTemplate(props) {
                 </div>
                 <h1 className="text-center mb-4">{titleMsg}</h1>
                 <div className="form-group">
-                  <label htmlFor="email">Email address: </label>
+                  <label htmlFor="username">userName: </label>
                   <input
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="username"
                     className="form-control"
-                    id="email"
+                    id="username"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.email}
+                    value={values.username}
                   />
                 </div>
                 <p className="text-danger" data-cy="email-warning">{errors.email}</p>

@@ -1,9 +1,8 @@
 import React from 'react'
 import AuthTemplate from '../components/templateAuthPage'
-import { useAuth } from '../contexts/authContext'
+import { signin } from '../api/tmdb-api'
 
 function SigninPage() {
-  const { signin } = useAuth()
   return (
     <AuthTemplate
       authMethod={signin}

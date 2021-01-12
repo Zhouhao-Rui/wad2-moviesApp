@@ -1,3 +1,5 @@
+const base_url = "http://localhost:9000/.netlify/functions"
+
 export const getMovies = (page) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=${page}`
@@ -172,4 +174,12 @@ export const getListDetail = (id) => {
   return fetch(`https://api.themoviedb.org/3/list/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`)
   .then(res => res.json())
   .then(json => json.items)
+}
+
+export const signup = (data) => {
+  return postData(`${base_url}/api/users?action=register`, data)
+}
+
+export const signin = (data) => {
+  return postData(`${base_url}/api/users`, data)
 }
