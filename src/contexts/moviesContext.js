@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer } from 'react'
 import { getMovies, getUpcomingMovies } from '../api/tmdb-api'
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { changeMoviesAction, changeHomePageAction, changeUpcomingPageAction, changeWatchListAction } from '../components/movieStore/actionCreators'
+import { changeHomePageAction, changeUpcomingPageAction, changeWatchListAction } from '../components/movieStore/actionCreators'
+import { addToFavor } from '../api/tmdb-api'
 
 export const MoviesContext = React.createContext(null)
 
@@ -58,7 +59,8 @@ const MoviesContextProvider = props => {
 
   const addToFavorites = (movieId) => {
     const index = state.movies.map(m => m.id).indexOf(movieId)
-    Reduxdispatch(changeMoviesAction(state.movies[index]))
+    // Reduxdispatch(changeMoviesAction(state.movies[index]))
+    addToFavor(movieId)
     dispatch({ type: 'add-favorite', payload: { movie: state.movies[index] } })
   }
 

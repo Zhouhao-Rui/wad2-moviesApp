@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../globals/fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector, shallowEqual } from 'react-redux'
 import Carousel from '../carousel'
+import { getUserFavors } from '../../api/tmdb-api';
 
 library.add(faUserCircle)
 function Profile() {
-  const { favorites } = useSelector(state => ({
-    favorites: state.getIn(["movies", "favorites"])
-  }), shallowEqual)
+  const [favorites, setFavorites] = useState([])
+
+  useEffect(() => {
+    getUserFavors().then(res => {
+      setFavorites(res)
+    })
+  }, [])
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "80vh" }}>

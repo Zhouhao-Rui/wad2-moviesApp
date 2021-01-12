@@ -1,14 +1,18 @@
-import React, {memo} from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import AddReviewButton from '../components/buttons/addReview';
 import PageTemplate from "../components/templateMovieListPage";
-import { shallowEqual, useSelector } from "react-redux";
+import { getUserFavors } from '../api/tmdb-api'
 
 const FavoriteMoviesPage = () => {
-  const { favorites } = useSelector(state => ({
-    favorites: state.getIn(["movies", "favorites"])
-  }), shallowEqual)
+  const [favorites, setFavorites] = useState([])
+  useEffect(() => {
+    getUserFavors().then(res => {
+      setFavorites(res)
+    })
+  }, [])
 
   return (
+    favorites.length &&
     <PageTemplate
       movies={favorites}
       title={"Favorite Movies"}

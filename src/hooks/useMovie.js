@@ -5,6 +5,7 @@ const useMovie = id => {
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     getMovie(id).then(movie => {
+      console.log(movie)
       setMovie(movie);
     });
   }, [id]);

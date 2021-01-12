@@ -1,16 +1,14 @@
 import React, { useContext } from 'react'
 import { MoviesContext } from '../../contexts/moviesContext'
-import { useAuth } from '../../contexts/authContext'
 import { withRouter } from 'react-router-dom'
 
 const AddToFavoriteButton = ({ movie, history }) => {
-  const { currentUser } = useAuth()
   const { addToFavorites } = useContext(MoviesContext)
 
   const handleAddToFavorite = e => {
     e.preventDefault()
     // should first check the user status, if user not logined, should direct to the login page
-    currentUser 
+    window.localStorage.getItem("username") 
     ? addToFavorites(movie.id)
     : history.push('/signin')
   }

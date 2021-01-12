@@ -2,29 +2,27 @@ const base_url = "http://localhost:9000/.netlify/functions"
 
 export const getMovies = (page) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=${page}`
+    `${base_url}/api/movies/page/${page}`
   )
     .then(res => res.json())
-    .then(json => json.results);
 };
 
 export const getMovie = id => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `${base_url}/api/movies/${id}`
   ).then(res => res.json());
 };
 
 export const getGenres = () => {
   return fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    `${base_url}/api/genres`
   )
   .then(res => res.json())
-  .then(json => json.genres);
 };
 
 export const getMovieReviews = id => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `${base_url}/api/movies/${id}/reviews`
   )
   .then(res => res.json())
   .then(json => json.results)
@@ -32,10 +30,21 @@ export const getMovieReviews = id => {
 
 export const getUpcomingMovies = (page) => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+    `${base_url}/api/movies/upcoming/${page}`
   )
   .then(res => res.json())
-  .then(json => json.results)
+}
+
+export const addToFavor = (id) => {
+  return postData(`${base_url}/api/users/${window.localStorage.getItem("username")}/favourites`, {id: id})
+}
+
+export const getUserFavors = () => {
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/favourites`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }).then(res => res.json())
 }
 
 export const searchMedia = (query_string) => {
@@ -100,7 +109,8 @@ function postData(url, data) {
     credentials: 'same-origin', // include, same-origin, *omit
     headers: {
       'user-agent': 'Mozilla/4.0 MDN Example',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': window.localStorage.getItem('token')
     },
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, cors, *same-origin
