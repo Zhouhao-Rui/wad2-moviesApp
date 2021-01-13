@@ -1,5 +1,4 @@
 import React, { useEffect, useState, memo } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
@@ -7,21 +6,11 @@ import { excerpt } from "../../util";
 const MovieReviews = ({ movie }) => {
   const [reviews, setReviews] = useState([])
 
-  // get the movies with reviews
-  const { favorites, watchLists } = useSelector(state => ({
-    favorites: state.getIn(['movies', 'favorites']),
-    watchLists: state.getIn(['movies', 'watchLists'])
-  }))
-
-  // find the movie
-  const reviewFavorMovie = favorites.find(item => item.id === movie.id) || { review: [] }
-  const reviewWatchListMovie = watchLists.find(item => item.id === movie.id) || { review: [] }
-
   useEffect(() => {
     getMovieReviews(movie.id).then(reviews => {
-      setReviews([...reviews, ...reviewFavorMovie.review, ...reviewWatchListMovie.review])
+      setReviews(reviews)
     })
-  }, [movie.id, reviewFavorMovie, reviewWatchListMovie])
+  }, [movie.id])
 
   return (
     <table className="table table-striped table-bordered table-hover">
@@ -33,10 +22,10 @@ const MovieReviews = ({ movie }) => {
         </tr>
       </thead>
       <tbody>
-        {reviews.map(review => {
+        {reviews && reviews.map(review => {
           return (
             <tr key={review.id}>
-              <td>{review.author}</td>
+              <td>{review.author.name}</td>
               <td>{excerpt(review.content)}</td>
               <td>
                 {" "}

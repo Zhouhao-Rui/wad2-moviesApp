@@ -25,7 +25,6 @@ export const getMovieReviews = id => {
     `${base_url}/api/movies/${id}/reviews`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getUpcomingMovies = (page) => {
