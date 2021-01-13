@@ -16,13 +16,13 @@ const SecondaryListItem = ({item}) => {
   const [medias, setMedias] = useState([])
   useEffect(() => {
     getListDetail(item.id).then(res => {
-      setMedias(res)
+      setMedias(res.tvs)
     })
   }, [item.id])
   return (
     <>
-      {medias.map((item, index) => (
-        <ListItemText key={index}>- {item.title}</ListItemText>
+      {medias && medias.map((item, index) => (
+        <ListItemText key={index}>- {item.name}</ListItemText>
       ))}
     </>
   )

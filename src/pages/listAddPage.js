@@ -52,6 +52,7 @@ function ListAddPage(props) {
   }, [id])
   useEffect(() => {
     getLists().then(res => {
+      console.log(res)
       setLists(res)
       setChosenList(res[0].id)
     })

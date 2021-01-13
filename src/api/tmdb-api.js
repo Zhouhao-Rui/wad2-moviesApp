@@ -176,9 +176,12 @@ export const getCreator = (id) => {
 }
 
 export const getLists = () => {
-  return fetch(`https://api.themoviedb.org/3/account/${process.env.REACT_APP_TMDB_ACCOUNT_ID}/lists?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}&page=1`)
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/list`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  })
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const createList = (data) => {
@@ -186,15 +189,18 @@ export const createList = (data) => {
 }
 
 export const addMovieToList = (list_id, media_id) => {
-  return postData(`https://api.themoviedb.org/3/list/${list_id}/add_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {
-    media_id: media_id
+  return postData(`${base_url}/api/users/${window.localStorage.getItem("username")}/list/${list_id}`, {
+    id: media_id
   })
 }
 
 export const getListDetail = (id) => {
-  return fetch(`https://api.themoviedb.org/3/list/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`)
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/list/${id}`, {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  })
   .then(res => res.json())
-  .then(json => json.items)
 }
 
 export const signup = (data) => {
