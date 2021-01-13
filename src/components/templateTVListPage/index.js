@@ -19,9 +19,9 @@ const TVPage = ({ page, action, stateName, router_name, history, initial_index }
   };
   const dispatch = useDispatch()
   useEffect(() => {
-    setCurrentPage(Number(page))
-    dispatch(action(page))
-  }, [dispatch, page, action])
+    page ? setCurrentPage(Number(page)) : setCurrentPage(1)
+    dispatch(action(currentPage))
+  }, [dispatch, currentPage, action])
   useEffect(() => {
     setDisplayedTVs(tvs)
   }, [tvs])

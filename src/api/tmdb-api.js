@@ -48,18 +48,16 @@ export const getUserFavors = () => {
 
 export const searchMedia = (query_string) => {
   return fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-us&query=${query_string}&page=1&include_adult=false`
+    `${base_url}/api/movies/search/${query_string}`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getTodayTvs = (page) => {
   return fetch(
-    `https://api.themoviedb.org/3/tv/airing_today?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+    `${base_url}/api/tvs/todaytv/page/${page}`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getLatestTVs = () => {
@@ -71,31 +69,28 @@ export const getLatestTVs = () => {
 
 export const getHotTVs = () => {
   return fetch(
-    `https://api.themoviedb.org/3/tv/on_the_air?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    `${base_url}/api/tvs/hottv`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getPopularTVs = (page) => {
   return fetch(
-    `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+    `${base_url}/api/tvs/populartv/page/${page}`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getTopRatedTVs = (page) => {
   return fetch(
-    `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+    `${base_url}/api/tvs/topratedtv/page/${page}`
   )
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getTVDetails = (id) => {
   return fetch(
-    `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+    `${base_url}/api/tvs/${id}`
   )
   .then(res => res.json())
 }
@@ -120,20 +115,39 @@ function postData(url, data) {
 }
 
 export const postTVRating = (id, val) => {
-  return postData(`https://api.themoviedb.org/3/tv/${id}/rating?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {"value": val})
+  const data = {
+    "id": id,
+    "rating": val
+  }
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/ratings`, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json',
+      'Authorization': window.localStorage.getItem('token')
+    },
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // *client, no-referrer
+  })
+ // parses response to JSON
 }
 
-export const getTVRating = () => {
-  return fetch(`https://api.themoviedb.org/3/account/${process.env.REACT_APP_TMDB_ACCOUNT_ID}/rated/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}&sort_by=created_at.asc`)
+export const getTVRating = (id) => {
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/ratings/${id}`)
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const deleteTVRating = (id) => {
-  return fetch(`https://api.themoviedb.org/3/tv/${id}/rating?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, {
-    method: 'DELETE'
+  return fetch(`${base_url}/api/users/${window.localStorage.getItem("username")}/ratings/?id=${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
   })
-  .then(res => res.json())
 }
 
 export const searchTV = (query, page) => {
@@ -152,15 +166,13 @@ export const getSimilarTVs = (id) => {
 }
 
 export const getTVReviews = (id) => {
-  return fetch(`https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`)
+  return fetch(`${base_url}/api/tvs/${id}/reviews`)
   .then(res => res.json())
-  .then(json => json.results)
 }
 
 export const getCreator = (id) => {
-  return fetch(`https://api.themoviedb.org/3/credit/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`)
+  return fetch(`${base_url}/api/creators/${id}`)
   .then(res => res.json())
-  .then(json => json.person)
 }
 
 export const getLists = () => {
@@ -170,7 +182,7 @@ export const getLists = () => {
 }
 
 export const createList = (data) => {
-  return postData(`https://api.themoviedb.org/3/list?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${process.env.REACT_APP_TMDB_SESSION_ID}`, data)
+  return postData(`${base_url}/api/users/${window.localStorage.getItem("username")}/list`, data)
 }
 
 export const addMovieToList = (list_id, media_id) => {

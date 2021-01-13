@@ -64,38 +64,40 @@ function RatePage(props) {
   }, [id])
 
   useEffect(() => {
-    getTVRating().then(res => {
-      if (res.filter(rate => rate.id === tv.id).length !== 0) {
-        const rating = res.filter(rate => rate.id === tv.id)[0].rating
-        setRatedValue(rating)
+    getTVRating(id).then(res => {
+      if (res) {
+        setRatedValue(res.rate)
       }
     })
   }, [tv.id])
 
   const handleClick = (value) => {
     postTVRating(id, value).then(res => {
-      setMsg(res.status_message)
-      if (res.success) {
+      console.log(res)
+      if (res.status === 201 || res.status === 200) {
         setMsgType("success")
+        setMsg("Success rating!")
         setTimeout(() => {
           props.history.go(-1)
         }, 2000)
       } else {
         setMsgType("error")
+        setMsg("Error rating!")
       }
     })
   }
 
   const handleDelete = () => {
     deleteTVRating(tv.id).then(res => {
-      setMsg(res.status_message)
-      if (res.success) {
+      if (res.status === 200) {
         setMsgType("success")
+        setMsg("Delete successfully")
         setTimeout(() => {
           props.history.go(-1)
         }, 2000)
       } else {
         setMsgType("error")
+        setMsg("Delete with error")
       }
     })
   }

@@ -43,22 +43,24 @@ function PeoplePage(props) {
               <Typography className="mt-2">
                 Department:  {creator.known_for_department}
               </Typography>
-              <Typography className="mt-2">
-                Gender:  {creator.gender === 1 ? 'male' : 'female'}
-              </Typography>
-              <Typography variant="body1" component="p" className="mt-2">
-                Popularity:  {creator.popularity}
-              </Typography>
               <Typography className="mt-5">
                 All Shows:
               </Typography>
               <div className="d-flex flex-row justify-content-between align-items-center">
-                {creator.known_for.map(media => (
+                {creator.tvs && creator.tvs.map(media => (
                   <div>
                     <Link to={`/tv/${media.id}`}><img data-cy="people-poster" src={`https://image.tmdb.org/t/p/w300/${media.poster_path}`} alt="" style={{ width: 150 }} /></Link>
                     <p>{media.name}</p>
                   </div>
                 ))}
+                {
+                  creator.movies && creator.movies.map(media => (
+                    <div>
+                      <Link to={`/tv/${media.id}`}><img data-cy="people-poster" src={`https://image.tmdb.org/t/p/w300/${media.poster_path}`} alt="" style={{ width: 150 }} /></Link>
+                      <p>{media.name}</p>
+                    </div>
+                  ))
+                }
               </div>
             </CardContent>
           </Card>

@@ -23,6 +23,7 @@ function DetailTVPage(props) {
   const [reviews, setReviews] = useState([])
   useEffect(() => {
     getTVDetails(id).then(res => {
+      console.log(res)
       setTV(res)
     })
     getSimilarTVs(id).then(res => {
@@ -50,11 +51,6 @@ function DetailTVPage(props) {
                 <Typography className="mt-2">
                   origin Counrty:  {tv.origin_country}
                 </Typography>
-                <Typography className="mt-2">
-                  production Country: {tv.production_countries.map(country => {
-                  return country.name
-                })}
-                </Typography>
                 <Typography variant="body1" component="p" className="mt-2">
                   overeview:  {tv.overview}
                 </Typography>
@@ -62,7 +58,7 @@ function DetailTVPage(props) {
                   first Air date:  {tv.first_air_date}
                 </Typography>
                 <Typography className="mt-2">
-                  Created By: {tv.created_by.map(people => (
+                  Created By: {tv.created_by && tv.created_by.map(people => (
                   <Link data-cy="people-link" key={people.id} className="ml-2" to={`/people/${people.credit_id}`}>{people.name}</Link>
                 ))}
                 </Typography>
@@ -100,7 +96,7 @@ function DetailTVPage(props) {
               {reviews.map(review => {
                 return (
                   <tr key={review.id} data-cy="review-attr">
-                    <td>{review.author}</td>
+                    <td>{review.author.name}</td>
                     <td>{excerpt(review.content)}</td>
                     <td>
                       {" "}
